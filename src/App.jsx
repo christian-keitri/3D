@@ -29,17 +29,21 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <>
-          <Header />
-          <HeroSection />
-          <CustomCursor />
-          <AboutSection />
-          <ProjectsSection />
-          <ContactSection />
-          <Footer />
-          <ProgressBar />
-
-        </>
+        <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <HeroSection />
+              <CustomCursor />
+              <AboutSection />
+              <ProjectsSection />
+              <ContactSection />
+              <Footer />
+              <ProgressBar />
+            </>
+          }
+        />
 
         <Route path="/thank-you" element={<ThankYou />} />
       </Routes>
