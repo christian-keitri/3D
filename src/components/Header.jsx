@@ -229,6 +229,7 @@ const Header = () => {
                 method="POST"
                 data-netlify="true"
                 netlify-honeypot="bot-field"
+                action="/thank-you"
 
                 className="space-y-4">
                 <input type="hidden" name="form-name" value="contact" />

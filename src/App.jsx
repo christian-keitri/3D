@@ -27,16 +27,22 @@ export default function App() {
     }
   }, [])
   return (
-    <>
-      <Header />
-      <HeroSection />
-      <CustomCursor />
-      <AboutSection />
-      <ProjectsSection />
-      <ContactSection />
-      <Footer />
-      <ProgressBar />
+    <Router>
+      <Routes>
+        <>
+          <Header />
+          <HeroSection />
+          <CustomCursor />
+          <AboutSection />
+          <ProjectsSection />
+          <ContactSection />
+          <Footer />
+          <ProgressBar />
 
-    </>
+        </>
+
+        <Route path="/thank-you" element={<ThankYou />} />
+      </Routes>
+    </Router>
   )
 }
