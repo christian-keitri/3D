@@ -225,13 +225,23 @@ const Header = () => {
               </div>
 
               {/*input forms */}
-              <form className="space-y-4">
+              <form name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+
+                className="space-y-4">
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="redirect" value="/thank-you" />
+                <input type="hidden" name="bot-field" />
+
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                     Name
                   </label>
                   <input type="text"
                     id="name"
+                    name="name"
                     placeholder="Your Name"
                     className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700">
                   </input>
@@ -243,6 +253,7 @@ const Header = () => {
                   </label>
                   <input type="email"
                     id="email"
+                    name="email"
                     placeholder="Your Email"
                     className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700">
                   </input>
@@ -255,6 +266,7 @@ const Header = () => {
                   <textarea
                     rows="4"
                     id="message"
+                    name="message"
                     placeholder="How can we help you? "
                     className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700">
                   </textarea>
