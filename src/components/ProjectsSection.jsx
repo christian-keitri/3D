@@ -14,9 +14,9 @@ const ProjectsSection = () => {
   const projectImages = [
     {
       id: 1,
-      title: "Habit Tracker",
+      title: "My PORTFOLIO",
       imageSrc: "/images/project-1.png",
-      link: "https://github.com/christian-keitri/habit_tracker",
+      link: "https://storied-taiyaki-06f63f.netlify.app",
     },
 
     {
@@ -28,15 +28,16 @@ const ProjectsSection = () => {
 
     {
       id: 3,
-      title: "Portfolio Website",
-      imageSrc: "/images/project-3.png"
+      title: "Bob Ai Summarizer",
+      imageSrc: "/images/project-3.png",
+      link: "https://bob-ai-summarizer.vercel.app",
     },
 
     {
       id: 4,
       title: "Netflix Clone",
       imageSrc: "/images/project-4.png",
-      link: "https://github.com/christian-keitri/Netflix-Clone",
+      link: "https://netflix-clone-1-cgyh.onrender.com/",
     },
 
   ]
