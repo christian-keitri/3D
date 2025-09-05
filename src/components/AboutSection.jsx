@@ -142,7 +142,9 @@ const AboutSection = () => {
             </ul>
 
             {/* CTA */}
-            <button className="mt-8 px-6 py-3 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-500 hover:scale-105 transition transform">
+            <button
+              onClick={() => window.open("https://www.facebook.com/christian.cj.768517", "_blank")}
+              className="mt-8 px-6 py-3 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-500 hover:scale-105 transition transform">
               Let’s Connect ✨
             </button>
           </div>

@@ -13,10 +13,11 @@ const Footer = () => {
         <div className="flex justify-between items-center">
 
           {/* */}
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-purple-200 bg-clip-text text-transparent">
-            BoB
-          </h2>
-
+          <a href="hero">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-purple-200 bg-clip-text text-transparent">
+              BoB
+            </h2>
+          </a>
           {/*Scroll Links */}
 
           <div>
@@ -24,23 +25,28 @@ const Footer = () => {
               Connect
             </h3>
             <div className="flex space-x-4">
-              <a className="text-gray-700 hover:text-violet-400 transition-colors" href="#">
+              <a className="text-gray-700 hover:text-violet-400 transition-colors"
+                href="https://github.com/christian-keitri">
                 <FiGithub className="w-5 h-5" />
               </a>
 
-              <a className="text-gray-700 hover:text-violet-400 transition-colors" href="#">
+              <a className="text-gray-700 hover:text-violet-400 transition-colors"
+                href="https://www.linkedin.com/in/christian-joshua-salapate-8596a1377">
                 <FiLinkedin className="w-5 h-5" />
               </a>
 
-              <a className="text-gray-700 hover:text-violet-400 transition-colors" href="#">
+              <a className="text-gray-700 hover:text-violet-400 transition-colors"
+                href="https://x.com/CSalapate4959">
                 <FiTwitter className="w-5 h-5" />
               </a>
 
-              <a className="text-gray-700 hover:text-violet-400 transition-colors" href="#">
+              <a className="text-gray-700 hover:text-violet-400 transition-colors"
+                href="https://www.instagram.com/christian1996cj05">
                 <FiInstagram className="w-5 h-5" />
               </a>
 
-              <a className="text-gray-700 hover:text-violet-400 transition-colors" href="#">
+              <a className="text-gray-700 hover:text-violet-400 transition-colors"
+                href="https://www.facebook.com/christian.cj.768517">
                 <FiFacebook className="w-5 h-5" />
               </a>
 

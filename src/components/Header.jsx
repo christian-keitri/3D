@@ -9,6 +9,29 @@ import {
   FiFacebook,
   FiInstagram,
 } from "react-icons/fi";
+import emailjs from "emailjs-com";
+
+const sendEmail = (e) => {
+  e.preventDefault();
+
+  emailjs.sendForm(
+    "service_nwv16v8",
+    "template_zsuxar9",
+    e.target,
+    "8VpWUYdLwH0cTIYJd"
+  ).then(
+    (result) => {
+      console.log("Message Sent!", result.text);
+      e.target.reset();
+      setContactFormOpen(false);
+      alert("☑️ Message sent successfully!");
+    },
+    (error) => {
+      console.log("Error:", error.text);
+      alert("❌ Failed to send message. Please try again.");
+    }
+  );
+};
 
 const Header = () => {
   // Toggle the Menu open/close
@@ -223,41 +246,33 @@ const Header = () => {
                   <FiX className="w-5 h-5 text-gray-300 font-extrabold" />
                 </button>
               </div>
-
-              {/*input forms */}
-              <form name="contact"
-                method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
-                action="/thank-you"
-
-                className="space-y-4">
-                <input type="hidden" name="form-name" value="contact" />
-                <input type="hidden" name="redirect" value="/thank-you" />
-                <input type="hidden" name="bot-field" />
-
+              <form onSubmit={sendEmail} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                     Name
                   </label>
-                  <input type="text"
+                  <input
+                    type="text"
                     id="name"
                     name="name"
                     placeholder="Your Name"
-                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700">
-                  </input>
+                    required
+                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"
+                  />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
                     Email
                   </label>
-                  <input type="email"
+                  <input
+                    type="email"
                     id="email"
                     name="email"
                     placeholder="Your Email"
-                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700">
-                  </input>
+                    required
+                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"
+                  />
                 </div>
 
                 <div>
@@ -268,19 +283,20 @@ const Header = () => {
                     rows="4"
                     id="message"
                     name="message"
-                    placeholder="How can we help you? "
-                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700">
-                  </textarea>
+                    placeholder="How can we help you?"
+                    required
+                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"
+                  />
                 </div>
 
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full px-4 py-2 bg-gradient-to-r from-violet-600 to-violet-400 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 rounded-lg shadow-md hover:shadow-lg hover:shadow-violet-600/50">
+                  className="w-full px-4 py-2 bg-gradient-to-r from-violet-600 to-violet-400 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 rounded-lg shadow-md hover:shadow-lg hover:shadow-violet-600/50"
+                >
                   Send Message
                 </motion.button>
-
               </form>
 
             </motion.div>
