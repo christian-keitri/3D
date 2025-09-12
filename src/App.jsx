@@ -11,6 +11,7 @@ import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
 import ProgressBar from "./components/ProgressBar"
 import ExperienceSection from "./components/ExperienceSection"
+import Certificate from "./components/Certificate"
 
 
 export default function App() {
@@ -33,7 +34,9 @@ export default function App() {
       <HeroSection />
       <CustomCursor />
       <AboutSection />
+
       <ExperienceSection />
+      <Certificate />
       <ProjectsSection />
 
       <ContactSection />
