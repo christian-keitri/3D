@@ -12,29 +12,37 @@ const ProjectsSection = () => {
 
   //Project images Data
   const projectImages = [
+
     {
       id: 1,
+      title: "Food Delivery App",
+      imageSrc: "/images/project-5.png",
+      link: "https://drive.google.com/uc?export=download&id=1nFwYyyWKRlbpIr0fPDoBVOs0e8nrNvWY",
+    },
+
+    {
+      id: 2,
       title: "My PORTFOLIO",
       imageSrc: "/images/project-1.png",
       link: "https://storied-taiyaki-06f63f.netlify.app",
     },
 
     {
-      id: 2,
+      id: 3,
       title: "Think Board",
       imageSrc: "/images/project-2.png",
       link: "https://think-board-ene0.onrender.com/home",
     },
 
     {
-      id: 3,
+      id: 4,
       title: "Bob Ai Summarizer",
       imageSrc: "/images/project-3.png",
       link: "https://bob-ai-summarizer.vercel.app",
     },
 
     {
-      id: 4,
+      id: 5,
       title: "Netflix Clone",
       imageSrc: "/images/project-4.png",
       link: "https://netflix-clone-1-cgyh.onrender.com/",
