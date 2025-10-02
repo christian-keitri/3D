@@ -106,21 +106,34 @@ const CertificateSection = () => {
           Certifications
         </h2>
 
-        {/* Certificate Card */}
-        <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-80 md:w-96 flex flex-col items-center">
-          {/* Glowing border */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-pink-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
+        {/* Certificates Row */}
+        <div className="flex flex-col md:flex-row gap-8 items-center">
+          {/* Certificate Card - Image */}
+          <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-80 md:w-96 flex flex-col items-center">
+            <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-pink-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
+            <img
+              src="/images/certificate.png"
+              alt="Certificate"
+              className="relative w-full rounded-lg border-4 border-purple-500 shadow-lg"
+            />
+          </div>
 
-          <img
-            src="/images/certificate.png" // your certificate image path
-            alt="Certificate"
-            className="relative w-full rounded-lg border-4 border-purple-500 shadow-lg"
-          />
-
-
-
+          {/* Certificate Card - Video */}
+          <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-80 md:w-96 flex flex-col items-center">
+            <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-yellow-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
+            <video
+              src="/video/10 Team Designs Milestone Certificate.mp4"
+              className="relative w-full rounded-lg border-4 border-pink-500 shadow-lg"
+              autoPlay
+              muted
+              loop={false}
+              controls
+            />
+          </div>
         </div>
       </div>
+
+
     </section>
   );
 };
