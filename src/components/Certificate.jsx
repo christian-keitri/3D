@@ -1,52 +1,39 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const CertificateSection = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
+  const carouselRef = useRef(null);
   const starsRef = useRef([]);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  const certificates = [
+    "/images/certificate.png",
+    "/images/RWD.png",
+    "/images/A2.png",
+    "/images/COE.png",
+  ];
 
+  useEffect(() => {
     // Title animation
     gsap.fromTo(
       titleRef.current,
       { y: 100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      }
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
     );
 
-    // Stars floating + twinkling
+    // Stars animation
     starsRef.current.forEach((star, index) => {
       const direction = index % 2 === 0 ? 1 : -1;
-      const speed = 0.5 + Math.random() * 0.5;
-
-      // Floating
       gsap.to(star, {
         x: `${direction * (80 + index * 10)}`,
         y: `${direction * -40 - index * 5}`,
         rotation: direction * 360,
         ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: speed,
-        },
+        repeat: -1,
+        yoyo: true,
+        duration: 5 + Math.random() * 5,
       });
-
-      // Twinkling
       gsap.to(star, {
         scale: 1.4,
         opacity: "+=0.3",
@@ -58,13 +45,31 @@ const CertificateSection = () => {
       });
     });
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger === sectionRef.current) {
-          trigger.kill();
+    // Carousel animation - infinite seamless loop
+    const carousel = carouselRef.current;
+    if (carousel) {
+      // Wait for DOM to be fully rendered
+      const initAnimation = () => {
+        // Calculate the width of one set of items (half the total width since we duplicate)
+        const totalWidth = carousel.scrollWidth;
+        const halfWidth = totalWidth / 2;
+        
+        if (halfWidth > 0) {
+          // Create infinite seamless loop
+          // Animate to negative half width, then repeat (which resets to 0)
+          gsap.to(carousel, {
+            x: -halfWidth,
+            duration: 20,
+            ease: "none",
+            repeat: -1,
+            immediateRender: false,
+          });
         }
-      });
-    };
+      };
+      
+      // Use requestAnimationFrame to ensure layout is complete
+      requestAnimationFrame(initAnimation);
+    }
   }, []);
 
   const addToStars = (el) => {
@@ -73,9 +78,8 @@ const CertificateSection = () => {
 
   return (
     <section
-      id="certificate"
       ref={sectionRef}
-      className="h-screen relative overflow-hidden bg-gradient-to-b from-black via-[#1a093b] to-[#9a74cf50] flex items-center justify-center"
+      className="h-screen relative overflow-hidden bg-gradient-to-b from-black via-[#1a093b] to-[#9a74cf50] flex flex-col items-center justify-center"
     >
       {/* Stars */}
       <div className="absolute inset-0 overflow-hidden">
@@ -98,7 +102,7 @@ const CertificateSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center">
+      <div className="relative z-10 flex flex-col items-center w-full px-4">
         <h2
           ref={titleRef}
           className="text-4xl md:text-5xl font-bold text-white mb-8 drop-shadow-lg text-center"
@@ -106,36 +110,74 @@ const CertificateSection = () => {
           Certifications
         </h2>
 
-        {/* Certificates Row */}
-        <div className="flex flex-col md:flex-row gap-8 items-center">
-          {/* Certificate Card - Image */}
-          <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-80 md:w-96 flex flex-col items-center">
-            <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-pink-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
-            <img
-              src="/images/certificate.png"
-              alt="Certificate"
-              className="relative w-full rounded-lg border-4 border-purple-500 shadow-lg"
-            />
-          </div>
+        {/* Carousel Container */}
+        <div className="w-full max-w-7xl mx-auto overflow-hidden">
+          <div
+            ref={carouselRef}
+            className="flex flex-row flex-nowrap gap-6 md:gap-8 w-max"
+          >
+            {/* First set of items */}
+            {certificates.map((src, i) => (
+              <div
+                key={`first-${i}`}
+                className="flex-shrink-0 relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-72 flex flex-col items-center"
+              >
+                <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-pink-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
+                <img
+                  src={src}
+                  alt={`Certificate ${i + 1}`}
+                  className="relative w-full rounded-lg border-4 border-purple-500 shadow-lg"
+                />
+              </div>
+            ))}
 
-          {/* Certificate Card - Video */}
-          <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-80 md:w-96 flex flex-col items-center">
-            <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-purple-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
-            <video
-              src="/video/10 Team Designs Milestone Certificate.mp4"
-              className="relative w-full rounded-lg border-4 border-pink-500 shadow-lg"
-              autoPlay
-              muted
-              loop={false}
-              controls
-            />
+            {/* Video certificate */}
+            <div className="flex-shrink-0 relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-72 flex flex-col items-center">
+              <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-purple-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
+              <video
+                src="/video/10 Team Designs Milestone Certificate.mp4"
+                className="relative w-full rounded-lg border-4 border-pink-500 shadow-lg"
+                autoPlay
+                muted
+                loop
+                controls
+              />
+            </div>
+
+            {/* Duplicated set for seamless loop */}
+            {certificates.map((src, i) => (
+              <div
+                key={`second-${i}`}
+                className="flex-shrink-0 relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-72 flex flex-col items-center"
+              >
+                <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-pink-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
+                <img
+                  src={src}
+                  alt={`Certificate ${i + 1}`}
+                  className="relative w-full rounded-lg border-4 border-purple-500 shadow-lg"
+                />
+              </div>
+            ))}
+
+            {/* Video certificate duplicate */}
+            <div className="flex-shrink-0 relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 w-72 flex flex-col items-center">
+              <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-purple-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
+              <video
+                src="/video/10 Team Designs Milestone Certificate.mp4"
+                className="relative w-full rounded-lg border-4 border-pink-500 shadow-lg"
+                autoPlay
+                muted
+                loop
+                controls
+              />
+            </div>
           </div>
         </div>
       </div>
-
-
     </section>
   );
 };
 
 export default CertificateSection;
+
+
