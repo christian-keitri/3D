@@ -153,7 +153,7 @@ const AboutSection = () => {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-2xl opacity-40 animate-pulse"></div>
             <img
-              className="relative lg:h-[28rem] md:h-[20rem] h-[16rem] rounded-full border-4 border-purple-500 shadow-lg"
+              className="relative lg:h-[28rem] md:h-[20rem] h-[16rem] shadow-lg"
               src="images/person.png"
               alt="profile-img"
             />
