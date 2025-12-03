@@ -14,14 +14,14 @@ const Footer = () => {
 
           {/* */}
           <a href="hero">
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-purple-200 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent">
               BoB
             </h2>
           </a>
           {/*Scroll Links */}
 
           <div>
-            <h3 className="text-xl font-semibold mb-4 text-purple-200 ">
+            <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
               Connect
             </h3>
             <div className="flex space-x-4">
