@@ -105,7 +105,7 @@ const CertificateSection = () => {
       <div className="relative z-10 flex flex-col items-center w-full px-4">
         <h2
           ref={titleRef}
-          className="text-4xl md:text-5xl font-bold text-white mb-8 drop-shadow-lg text-center"
+          className="text-4xl md:text-5xl font-bold mb-8 drop-shadow-lg text-center bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent"
         >
           Certifications
         </h2>
