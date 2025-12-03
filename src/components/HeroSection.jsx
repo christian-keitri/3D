@@ -22,7 +22,7 @@ const HeroSection = () => {
             duration: 1.5,
           }}
 
-          className="text-5xl md:text-7xl lg:text-8xl font-bold z-10 mb-6">
+          className="text-5xl md:text-7xl lg:text-8xl font-bold z-10 mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent">
           Build Fast <br /> Reliable Results
         </motion.h1>
 
