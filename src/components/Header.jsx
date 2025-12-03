@@ -146,7 +146,12 @@ const Header = () => {
               stiffness: 100,
               damping: 15,
             }}
-            className="hidden lg:block ml-4 px-4 py-2 rounded-xl bg-gradient-to-r from-gray-400 to-gray-100 text-violet-700 font-bold hover:from-violet-700 hover:to-purple-700 hover:text-white transition-all duration-500"
+            className="hidden lg:block ml-4 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
+            text-white font-semibold rounded-xl shadow-lg hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            transform hover:scale-105 transition-all duration-300
+            border border-purple-400/30"
+
+
           >
             Hire Me
           </motion.button>
@@ -209,7 +214,12 @@ const Header = () => {
             toggleMenu()
             openContactForm()
           }}
-            className="mt-4 block w-full px-4 py-2 rounded-lg bg-gradient-to-r from-violet-600 to-violet-400 font-bold">
+            className="mt-4 block w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
+            text-white font-semibold rounded-xl shadow-lg
+            hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            transform hover:scale-105 transition-all duration-300
+            border border-purple-400/30">
+
             CONTACT ME
           </button>
         </div>
@@ -293,7 +303,12 @@ const Header = () => {
                   type="submit"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full px-4 py-2 bg-gradient-to-r from-violet-600 to-violet-400 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 rounded-lg shadow-md hover:shadow-lg hover:shadow-violet-600/50"
+                 className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
+            text-white font-semibold rounded-xl shadow-lg
+            hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            transform hover:scale-105 transition-all duration-300
+            border border-purple-400/30"
+
                 >
                   Send Message
                 </motion.button>
