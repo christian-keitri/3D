@@ -121,7 +121,7 @@ const AboutSection = () => {
       <div className="container mx-auto px-6 h-full flex flex-col items-center justify-center relative z-10">
         <h1
           ref={titleRef}
-          className="text-4xl md:text-6xl font-bold text-center text-white drop-shadow-lg"
+          className="text-4xl md:text-5xl font-bold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg"
         >
           About Me
         </h1>
@@ -144,7 +144,12 @@ const AboutSection = () => {
             {/* CTA */}
             <button
               onClick={() => window.open("https://www.facebook.com/christian.cj.768517", "_blank")}
-              className="mt-8 px-6 py-3 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-500 hover:scale-105 transition transform">
+              className="mt-8 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
+            text-white font-semibold rounded-xl shadow-lg
+            hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            transform hover:scale-105 transition-all duration-300
+            border border-purple-400/30">
+
               Let’s Connect ✨
             </button>
           </div>
