@@ -136,7 +136,7 @@ const CertificateSection = () => {
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-purple-400 rounded-xl blur-2xl opacity-30 animate-pulse"></div>
               <video
                 src="/video/10 Team Designs Milestone Certificate.mp4"
-                className="relative w-full rounded-lg border-4 border-pink-500 shadow-lg"
+                className="relative w-full rounded-lg border-4 border-purple-500 shadow-lg"
                 autoPlay
                 muted
                 loop
