@@ -202,7 +202,7 @@ const ProjectsSection = () => {
 
       {/*section title */}
       <div className='container mx-auto px-4 mb-16 relative z-10'>
-        <h2 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-black text-center mb-4 opacity-0">
+        <h2 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 opacity-0 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent">
           Featured Projects
         </h2>
 
