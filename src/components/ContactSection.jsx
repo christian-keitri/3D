@@ -141,7 +141,12 @@ const ContactSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             download
-            className="px-10 py-2 rounded-xl bg-black hover:bg-white hover:text-black transition-all duration-500 scale-[0.1] absolute sm:mt-9 mt-7 text-nowrap"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
+            text-white font-semibold rounded-xl shadow-lg
+            hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            transform hover:scale-105 transition-all duration-300
+            border border-purple-400/30 scale-[0.1] absolute sm:mt-9 mt-7 text-nowrap"
+
           >
             View or Download my CV
           </a>
