@@ -1,161 +1,224 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, memo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { motion } from 'framer-motion'
+import { FiMail, FiLinkedin, FiGithub, FiFileText } from 'react-icons/fi'
 
-
-const ContactSection = () => {
-  //Main refs
-  const circleRef = useRef(null)
+const ContactSection = memo(() => {
   const sectionRef = useRef(null)
-  const initialTextRef = useRef(null)
-  const finalTextRef = useRef(null)
+  const titleRef = useRef(null)
+  const contentRef = useRef(null)
 
   useEffect(() => {
-    //Register Gsap plugins
     gsap.registerPlugin(ScrollTrigger)
 
-    // make sure all scroll trigger instance are properly killed
+    // Fade in animation for title
+    gsap.fromTo(
+      titleRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    )
 
-    const cleanup = () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.vars.trigger === sectionRef.current) {
-          st.kill(true)
+    // Fade in animation for content
+    if (contentRef.current) {
+      gsap.fromTo(
+        contentRef.current.querySelectorAll('.contact-item'),
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      )
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.trigger === sectionRef.current) {
+          trigger.kill()
         }
       })
     }
-
-    //Clean up any existing Scroll Trigger
-
-    gsap.set(circleRef.current, { scale: 1, backgroundColor: "white" })
-    gsap.set(initialTextRef.current, { opacity: 1 })
-    gsap.set(finalTextRef.current, { opacity: 0 })
-
-    //Create the main timeline 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-
-
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=200%",
-        pin: true,
-        scrub: 0.5,
-        anticipatePin: 1,
-        fastScrollEnd: true,
-        preventOverlaps: true,
-        invalidateOnRefresh: true,
-      },
-    })
-
-    tl.to(
-      circleRef.current,
-      {
-        scale: 5,
-        backgroundColor: "#9333EA",
-        ease: "power1.inOut",
-        duration: 0.5,
-      },
-      0
-    )
-
-    //fade out initial text during first half
-    tl.to(
-      initialTextRef.current,
-      {
-        opacity: 0,
-        ease: "power1.out",
-        duration: 0.2,
-      },
-      0.1,
-    )
-
-    //Mid-zoom to final State (50%-100%)
-
-    tl.to(
-
-      circleRef.current,
-      {
-        scale: 17,
-        backgroundColor: "#E9D5FF",
-        boxShadow: " 0 0 50px 20px rgba(233,213,255,0.3)",
-        ease: " power2.inOut",
-        duration: 0.5,
-      },
-      0.5,
-    )
-
-    //fade in final text during secondhalf
-    tl.to(
-      finalTextRef.current,
-      {
-        opacity: 1,
-        ease: "power2.in",
-        duration: 0.2,
-      },
-      0.7
-    )
-
-    //return cleanup function
-
-    return cleanup
-
-
   }, [])
-
 
   return (
     <section
       id="contact"
-      ref={sectionRef} className="flex items-center justify-center bg-black relative"
-      style={{ overscrollBehavior: "none" }}
+      ref={sectionRef}
+      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black/90 via-[#1a093b]/90 to-black/90 backdrop-blur-sm relative py-16 md:py-20 lg:py-24 px-6 md:px-8"
     >
-
-      {/*simple circle with minimal nesting */}
-
-      <div ref={circleRef}
-        className="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full flex items-center justify-center relative transition-shadow duration-1000 shadow-violet-300/50 shadow-lg bg-gradient-to-r from-violet-400 to-pink-100">
-
-        {/*initial Text */}
-
-        <p
-          ref={initialTextRef}
-          className="text-black font-bold text-base sm:text-lg md:text-xl absolute inset-0 flex items-center text-center">
-          SCROLL DOWN
-        </p>
-
-        {/*final text */}
-        <div
-          ref={finalTextRef}
-          className="text-center relative flex flex-col items-center justify-center"
-        >
-          <h1 className="text-black md:w-[10rem] w-[20rem] lg:scale-[0.4] sm:scale-[0.25] scale-[0.07] md:font-bold text-sm sm:text-base leading-none mb-5">
-            Step Into the Future With BoB
-          </h1>
-
-          <p className="text-black lg:w-[40rem] w-[20rem] absolute sm:mt-3 mt-1 md:scale-[0.1] scale-[0.068]">
-            Building automation systems and full-stack experiences that scale. Clean code, chill tone, and tech that speaks for itself.
-          </p>
-
-          <a
-            href="/Bob-CV.pdf" // <-- replace with your CV path
-            target="_blank"
-            rel="noopener noreferrer"
-            download
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
-            text-white font-semibold rounded-xl shadow-lg
-            hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-            transform hover:scale-105 transition-all duration-300
-            border border-purple-400/30 scale-[0.1] absolute sm:mt-9 mt-7 text-nowrap"
-
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.1),transparent_70%)]" />
+      
+      <div className="max-w-4xl mx-auto w-full relative z-10">
+        {/* Title */}
+        <div ref={titleRef} className="text-center mb-12 md:mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent"
           >
-            View or Download my CV
-          </a>
+            Let's Build Something Great Together
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl md:text-2xl text-purple-200/80 max-w-2xl mx-auto"
+          >
+            I'm always open to discussing new opportunities, innovative projects, or just having a conversation about technology.
+          </motion.p>
         </div>
 
-      </div>
+        {/* Contact Content */}
+        <div ref={contentRef} className="space-y-8">
+          {/* Value Proposition */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="contact-item bg-white/5 backdrop-blur-md rounded-2xl p-8 md:p-10 border border-purple-600/30 hover:border-purple-500/50 transition-all duration-300"
+          >
+            <h3 className="text-2xl font-semibold text-white mb-4">Why Work With Me?</h3>
+            <div className="grid md:grid-cols-2 gap-6 text-purple-200">
+              <div className="space-y-2">
+                <p className="font-medium text-purple-300">🚀 Fast Delivery</p>
+                <p className="text-sm">Production-ready code delivered on time, every time</p>
+              </div>
+              <div className="space-y-2">
+                <p className="font-medium text-purple-300">💡 Problem Solver</p>
+                <p className="text-sm">Clean architecture and scalable solutions</p>
+              </div>
+              <div className="space-y-2">
+                <p className="font-medium text-purple-300">🤝 Team Player</p>
+                <p className="text-sm">Clear communication and collaborative mindset</p>
+              </div>
+              <div className="space-y-2">
+                <p className="font-medium text-purple-300">📈 Results Driven</p>
+                <p className="text-sm">Focus on impact and measurable outcomes</p>
+              </div>
+            </div>
+          </motion.div>
 
+          {/* Contact Methods */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="contact-item grid md:grid-cols-2 gap-6"
+          >
+            {/* Email */}
+            <a
+              href="mailto:your.email@example.com"
+              className="group bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 flex items-center gap-4"
+            >
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <FiMail className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-purple-300 mb-1">Email</p>
+                <p className="text-white font-medium">Get in touch</p>
+              </div>
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com/in/christian-joshua-salapate-8596a1377/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 flex items-center gap-4"
+            >
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <FiLinkedin className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-purple-300 mb-1">LinkedIn</p>
+                <p className="text-white font-medium">Connect professionally</p>
+              </div>
+            </a>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="contact-item flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <a
+              href="/Bob-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
+              text-white font-semibold rounded-xl shadow-lg
+              hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+              transform hover:scale-105 transition-all duration-300
+              border border-purple-400/30 w-full sm:w-auto justify-center"
+            >
+              <FiFileText className="w-5 h-5" />
+              <span>Download Resume</span>
+            </a>
+
+            <a
+              href="https://github.com/christian-keitri"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-white/5 backdrop-blur-md
+              text-white font-semibold rounded-xl shadow-lg
+              hover:bg-white/10 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]
+              transform hover:scale-105 transition-all duration-300
+              border border-purple-600/30 w-full sm:w-auto justify-center"
+            >
+              <FiGithub className="w-5 h-5" />
+              <span>View GitHub</span>
+            </a>
+          </motion.div>
+
+          {/* Closing Statement */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="contact-item text-center"
+          >
+            <p className="text-purple-200/70 text-lg">
+              Ready to turn ideas into reality? Let's connect and create something amazing.
+            </p>
+          </motion.div>
+        </div>
+      </div>
     </section>
   )
-}
+})
+
+ContactSection.displayName = 'ContactSection'
 
 export default ContactSection
+
+
+

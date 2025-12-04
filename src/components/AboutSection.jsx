@@ -1,8 +1,8 @@
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, memo } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-const AboutSection = () => {
+const AboutSection = memo(() => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
   const introRef = useRef(null)
@@ -96,7 +96,7 @@ const AboutSection = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="h-screen relative overflow-hidden bg-gradient-to-b from-black via-[#1a093b] to-[#9a74cf50]"
+      className="h-screen relative overflow-hidden bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm"
     >
       {/* Stars */}
       <div className="absolute inset-0 overflow-hidden">
@@ -118,19 +118,19 @@ const AboutSection = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-6 h-full flex flex-col items-center justify-center relative z-10">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 h-full flex flex-col items-center justify-center relative z-10 py-12 md:py-16">
         <h1
           ref={titleRef}
-          className="text-4xl md:text-5xl font-bold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg mb-8 md:mb-12"
         >
           About Me
         </h1>
 
         <div
           ref={introRef}
-          className="mt-12 flex flex-col md:flex-row items-center justify-between gap-12"
+          className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-center md:justify-between gap-8 md:gap-12 lg:gap-16"
         >
-          <div className="max-w-xl text-purple-200 tracking-wide leading-relaxed">
+          <div className="w-full md:w-1/2 lg:max-w-xl text-purple-200 tracking-wide leading-relaxed flex flex-col justify-center">
             <p className="text-lg md:text-2xl font-semibold mb-4">
               👋 Hi, I'm <span className="text-purple-400">Christian</span>
             </p>
@@ -155,18 +155,28 @@ const AboutSection = () => {
           </div>
 
           {/* Profile Image */}
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-2xl opacity-40 animate-pulse"></div>
-            <img
-              className="relative lg:h-[28rem] md:h-[20rem] h-[16rem] shadow-lg"
-              src="images/person.png"
-              alt="profile-img"
-            />
+          <div className="relative w-full md:w-1/2 flex justify-center md:justify-end">
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-2xl opacity-40 animate-pulse"></div>
+              <img
+                className="relative lg:h-[28rem] md:h-[20rem] h-[16rem] w-auto object-contain"
+                src="images/person.png"
+                alt="profile-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
   )
-}
+})
+
+
+
+AboutSection.displayName = 'AboutSection'
 
 export default AboutSection
+
+

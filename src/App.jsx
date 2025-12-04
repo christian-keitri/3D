@@ -1,48 +1,60 @@
-import { useEffect } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { lazy, Suspense } from "react"
+import Spline from '@splinetool/react-spline'
 
+// Lazy load components for better code splitting
 import Header from "./components/Header"
 import HeroSection from "./components/HeroSection"
 import CustomCursor from "./components/CustomCursor"
-import AboutSection from "./components/AboutSection"
-import ProjectsSection from "./components/ProjectsSection"
-import ContactSection from "./components/ContactSection"
-import Footer from "./components/Footer"
 import ProgressBar from "./components/ProgressBar"
-import ExperienceSection from "./components/ExperienceSection"
-import Certificate from "./components/Certificate"
 
+const AboutSection = lazy(() => import("./components/AboutSection"))
+const ProjectsSection = lazy(() => import("./components/ProjectsSection"))
+const ContactSection = lazy(() => import("./components/ContactSection"))
+const Footer = lazy(() => import("./components/Footer"))
+const ExperienceSection = lazy(() => import("./components/ExperienceSection"))
+const Certificate = lazy(() => import("./components/Certificate"))
+
+// Loading fallback component
+const SectionLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+)
 
 export default function App() {
-
-  useEffect(() => {
-    //Register Scroll Trigger plugin
-    gsap.registerPlugin(ScrollTrigger)
-
-    //REfresh Scroll Trigger when the page is fully loaded
-    ScrollTrigger.refresh()
-
-    //Clean up ScrollTrigger on component unmount
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
-  }, [])
   return (
     <>
-      <Header />
-      <HeroSection />
-      <CustomCursor />
-      <AboutSection />
+      {/* Spline Background - Fixed position - Visible on all devices */}
+      <div className="spline-background">
+        <div className="absolute inset-0 w-full h-full">
+          <Spline 
+            className="absolute xl:left-[-20%] lg:left-[-15%] left-0 xl:top-[-10%] lg:top-0 top-[-20%] w-full h-full"
+            scene="https://prod.spline.design/UqPdLeYjLQDNoJsN/scene.splinecode" 
+          />
+        </div>
+        {/* Decorative overlay to cover watermark area */}
+        <div className="spline-watermark-cover" />
+      </div>
 
-      <ExperienceSection />
-      <Certificate />
-      <ProjectsSection />
-
-      <ContactSection />
-      <Footer />
-      <ProgressBar />
+      {/* Content with higher z-index */}
+      <div className="relative z-10">
+        <Header />
+        <HeroSection />
+        <CustomCursor />
+        
+        <Suspense fallback={<SectionLoader />}>
+          <AboutSection />
+          <ExperienceSection />
+          <Certificate />
+          <ProjectsSection />
+          <ContactSection />
+          <Footer />
+        </Suspense>
+        
+        <ProgressBar />
+      </div>
 
     </>
   )
 }
+
