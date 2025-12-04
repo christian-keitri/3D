@@ -17,6 +17,7 @@ const CertificateSection = memo(() => {
     { type: "image", src: "/images/RWD.png", alt: "Responsive Web Design Certificate" },
     { type: "image", src: "/images/A2.png", alt: "Certificate A2" },
     { type: "image", src: "/images/COE.png", alt: "Certificate of Excellence" },
+    { type: "image", src: "/images/JS.png", alt: "JAVA SCRIPT" },
     { type: "video", src: "/video/10 Team Designs Milestone Certificate.mp4", alt: "Team Designs Milestone Certificate" },
   ], []);
 
