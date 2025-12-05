@@ -48,7 +48,7 @@ const Footer = memo(() => {
   return (
     <footer 
       ref={footerRef}
-      className="relative bg-gradient-to-b from-black via-violet-900/20 to-black backdrop-blur-sm text-white py-20 px-6 mt-40 overflow-hidden"
+      className="relative bg-gradient-to-b from-black via-violet-900/20 to-black backdrop-blur-sm text-white py-20 px-6 overflow-hidden"
     >
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none">
