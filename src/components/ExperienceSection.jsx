@@ -62,7 +62,16 @@ const ExperienceSection = () => {
   const sectionRef = useRef(null)
   const [expandedCards, setExpandedCards] = useState({})
   const [hoveredSkill, setHoveredSkill] = useState(null)
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024)
   const skillsRef = useRef(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const toggleCard = (index) => {
     setExpandedCards(prev => ({
@@ -93,24 +102,20 @@ const ExperienceSection = () => {
       }
     )
 
-    // Skills animation
+    // Skills animation - Simple fade in, no complex animations
     if (skillsRef.current) {
       gsap.fromTo(
         skillsRef.current.querySelectorAll(".skill-item"),
         { 
-          y: 50, 
           opacity: 0, 
-          scale: 0.8,
-          rotation: -10
+          scale: 0.5
         },
         {
-          y: 0,
           opacity: 1,
           scale: 1,
-          rotation: 0,
-          stagger: 0.05,
-          duration: 0.6,
-          ease: "back.out(1.7)",
+          stagger: 0.03,
+          duration: 0.5,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: skillsRef.current,
             start: "top 80%",
@@ -143,26 +148,23 @@ const ExperienceSection = () => {
     <section
       id="experience"
       ref={sectionRef}
-      className="bg-gradient-to-b from-black via-[#0b0b0f] to-black text-white py-20 px-6 relative overflow-hidden"
+      className="min-h-screen bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm text-white py-12 md:py-16 px-6 md:px-8 relative overflow-hidden"
     >
-      {/* Enhanced background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(139,92,246,0.2),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.15),transparent_60%)]" />
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10 py-8">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg">
           Experience
         </h2>
-        <p className="text-center text-gray-400 mb-12 text-sm md:text-base">
+        <p className="text-center text-gray-400 mb-8 md:mb-12 text-sm md:text-base">
           Click on any experience to view detailed achievements
         </p>
 
         {/* timeline */}
-        <div className="relative border-l-2 border-purple-600/50 pl-6 md:pl-8">
+        <div className="relative border-l-2 border-purple-600/50 pl-6 md:pl-8 mb-8">
           {experiences.map((exp, i) => (
             <div
               key={i}
-              className="timeline-item mb-12 relative group"
+              className="timeline-item mb-8 md:mb-12 relative group"
             >
               {/* timeline dot with pulse animation */}
               <div className="absolute w-5 h-5 bg-purple-500 rounded-full -left-[11px] md:-left-[13px] border-2 border-white shadow-[0_0_15px_rgba(168,85,247,0.9)] group-hover:scale-150 group-hover:shadow-[0_0_25px_rgba(168,85,247,1)] transition-all duration-300 z-10">
@@ -255,7 +257,7 @@ const ExperienceSection = () => {
         </div>
 
         {/* Resume CTA */}
-        <div className="mt-16 text-center">
+        <div className="mt-8 md:mt-12 text-center">
           <a
             href="/Bob-CV.pdf"
             target="_blank"
@@ -271,47 +273,110 @@ const ExperienceSection = () => {
           </a>
         </div>
 
-        {/* skills grid */}
-        <div className="mt-20" ref={skillsRef}>
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+        {/* Skills Solar System */}
+        <div className="mt-12 md:mt-16" ref={skillsRef}>
+          <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
             Technical Skills
           </h3>
-          <p className="text-center text-gray-400 mb-8 text-sm">
+          <p className="text-center text-gray-400 mb-8 md:mb-12 text-sm">
             Hover over skills to see proficiency level
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
-            {skills.map((skill, i) => (
-              <div
-                key={i}
-                onMouseEnter={() => setHoveredSkill(i)}
-                onMouseLeave={() => setHoveredSkill(null)}
-                className="skill-item relative px-4 py-4 md:px-5 md:py-5 rounded-xl 
-                bg-purple-800/20 text-purple-200 border border-purple-600/30 
-                hover:bg-purple-700/40 hover:border-purple-500/50
-                hover:shadow-[0_0_25px_rgba(168,85,247,0.6)]
-                transition-all duration-300 transform hover:-translate-y-2 hover:scale-105
-                flex flex-col items-center justify-center gap-2 cursor-pointer
-                group/skill"
-              >
-                <div className="text-2xl md:text-3xl transform group-hover/skill:rotate-12 group-hover/skill:scale-110 transition-transform duration-300">
-                  {skill.icon}
-                </div>
-                <span className="text-sm md:text-base font-medium">{skill.name}</span>
-                
-                {/* Tooltip */}
-                {hoveredSkill === i && skill.proficiency && (
-                  <div className="absolute -top-16 left-1/2 transform -translate-x-1/2
-                  bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
-                  border border-purple-500/50 shadow-xl z-20 whitespace-nowrap
-                  animate-fadeIn">
-                    <div className="font-semibold">{skill.proficiency}</div>
-                    {skill.years && <div className="text-purple-300">{skill.years} years</div>}
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
-                    w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
+          
+          {/* Solar System Container */}
+          <div className="relative w-full h-[500px] sm:h-[600px] md:h-[750px] flex items-center justify-center overflow-visible">
+            {/* Central Sun/Title */}
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <div className="relative">
+                <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-purple-500/30 via-pink-500/30 to-purple-500/30 
+                backdrop-blur-md border-2 border-purple-400/50 flex items-center justify-center
+                shadow-[0_0_40px_rgba(168,85,247,0.5)]">
+                  <div className="text-center">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+                      Skills
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* Orbital Rings - Visible orbits - Increased spacing with 4 orbits */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+              {/* Orbit 1 - Inner */}
+              <div className="absolute w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] rounded-full border-2 border-purple-500/20" />
+              {/* Orbit 2 - Middle Inner */}
+              <div className="absolute w-[300px] h-[300px] sm:w-[380px] sm:h-[380px] md:w-[480px] md:h-[480px] rounded-full border-2 border-purple-500/20" />
+              {/* Orbit 3 - Middle Outer */}
+              <div className="absolute w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] md:w-[640px] md:h-[640px] rounded-full border-2 border-purple-500/20" />
+              {/* Orbit 4 - Outer */}
+              <div className="absolute w-[500px] h-[500px] sm:w-[620px] sm:h-[620px] md:w-[800px] md:h-[800px] rounded-full border-2 border-purple-500/20" />
+            </div>
+
+            {/* Orbiting Skills - Distributed across 4 orbits for better spacing */}
+            <div className="absolute inset-0">
+              {skills.map((skill, i) => {
+                // Distribute skills across 4 orbits to reduce crowding
+                const orbitIndex = i % 4 // 0, 1, 2, or 3
+                const skillsPerOrbit = Math.ceil(skills.length / 4)
+                const positionInOrbit = Math.floor(i / 4)
+                
+                // Calculate responsive radius for each orbit - increased spacing
+                let baseRadius
+                if (windowWidth < 640) {
+                  baseRadius = [100, 150, 200, 250] // Mobile - 4 orbits
+                } else if (windowWidth < 768) {
+                  baseRadius = [130, 190, 250, 310] // Tablet - 4 orbits
+                } else {
+                  baseRadius = [160, 240, 320, 400] // Desktop - 4 orbits
+                }
+                
+                const radius = baseRadius[orbitIndex]
+                
+                // Calculate angle - offset each orbit slightly and space skills evenly
+                const angleOffset = orbitIndex * 20 // More rotation per orbit for better spacing
+                const angleStep = 360 / skillsPerOrbit
+                const angle = (positionInOrbit * angleStep + angleOffset) % 360
+                
+                const x = Math.cos((angle * Math.PI) / 180) * radius
+                const y = Math.sin((angle * Math.PI) / 180) * radius
+                
+                return (
+                  <div
+                    key={i}
+                    onMouseEnter={() => setHoveredSkill(i)}
+                    onMouseLeave={() => setHoveredSkill(null)}
+                    className="skill-item absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                    w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full
+                    bg-purple-800/30 backdrop-blur-sm text-purple-200 border-2 border-purple-600/40 
+                    hover:bg-purple-700/50 hover:border-purple-500/60
+                    hover:shadow-[0_0_25px_rgba(168,85,247,0.8)]
+                    transition-all duration-300
+                    flex flex-col items-center justify-center gap-0.5 cursor-pointer
+                    group/skill z-20"
+                    style={{
+                      transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                    }}
+                  >
+                    <div className="text-sm sm:text-base md:text-lg transform group-hover/skill:scale-110 transition-transform duration-300">
+                      {skill.icon}
+                    </div>
+                    <span className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-center leading-tight px-0.5">{skill.name}</span>
+                    
+                    {/* Tooltip */}
+                    {hoveredSkill === i && skill.proficiency && (
+                      <div className="absolute -top-20 left-1/2 transform -translate-x-1/2
+                      bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
+                      border border-purple-500/50 shadow-xl z-30 whitespace-nowrap
+                      animate-fadeIn">
+                        <div className="font-semibold">{skill.proficiency}</div>
+                        {skill.years && <div className="text-purple-300">{skill.years} years</div>}
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
+                        w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>
