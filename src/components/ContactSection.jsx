@@ -62,7 +62,7 @@ const ContactSection = memo(() => {
     <section
       id="contact"
       ref={sectionRef}
-      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black/90 via-[#1a093b]/90 to-black/90 backdrop-blur-sm relative py-16 md:py-20 lg:py-24 px-6 md:px-8"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black/90 via-[#1a093b]/90 to-black/90 backdrop-blur-sm relative py-16 md:py-20 lg:py-24 px-6 md:px-8 pb-0"
     >
       {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.1),transparent_70%)]" />

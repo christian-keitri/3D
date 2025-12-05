@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useCallback, useMemo, memo } from "react";
+import { useState, useCallback, useMemo, memo, useEffect } from "react";
 import {
   FiMenu,
   FiX,
@@ -21,6 +21,19 @@ const Header = () => {
 
   const openContactForm = useCallback(() => setContactFormOpen(true), [])
   const closeContactForm = useCallback(() => setContactFormOpen(false), [])
+
+  // Listen for custom event to open contact form from other components
+  useEffect(() => {
+    const handleOpenContactForm = () => {
+      openContactForm();
+    };
+
+    window.addEventListener('openContactForm', handleOpenContactForm);
+
+    return () => {
+      window.removeEventListener('openContactForm', handleOpenContactForm);
+    };
+  }, [openContactForm]);
 
   const sendEmail = useCallback((e) => {
     e.preventDefault();
@@ -73,14 +86,10 @@ const Header = () => {
         {/* Logo/name */}
         <motion.a
           href="#hero"
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 25,
-            delay: 0.3,
-            duration: 1.2,
+            duration: 0.4,
           }}
           whileHover={{ scale: 1.05 }}
           className="flex items-center group"
@@ -122,13 +131,11 @@ const Header = () => {
                 key={link.name}
                 href={link.href}
                 onClick={handleDesktopClick}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 20,
-                  delay: 0.7 + index * 0.2,
+                  duration: 0.3,
+                  delay: 0.2 + index * 0.05,
                 }}
                 whileHover={{ y: -2 }}
                 className="relative text-purple-200 hover:text-purple-300 font-medium transition-colors duration-300 group px-3 py-2 cursor-pointer"
@@ -148,9 +155,9 @@ const Header = () => {
               ({ Icon, link }, i) => (
                 <motion.a
                   key={link}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.3, duration: 0.8 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.3 }}
                   whileHover={{ scale: 1.2, y: -2 }}
                   whileTap={{ scale: 0.9 }}
                   className="relative p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/50 text-purple-200 hover:text-purple-300 transition-all duration-300 group"
@@ -169,14 +176,11 @@ const Header = () => {
           {/* Hire Me Button (Desktop only) */}
           <motion.button
             onClick={openContactForm}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{
-              delay: 1.6,
-              duration: 0.8,
-              type: "spring",
-              stiffness: 100,
-              damping: 15,
+              delay: 0.5,
+              duration: 0.3,
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

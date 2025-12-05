@@ -13,7 +13,7 @@ const CertificateSection = memo(() => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const certificates = useMemo(() => [
-    { type: "image", src: "/images/certificate.png", alt: "Certificate 1" },
+    { type: "image", src: "/images/certificate.png", alt: "AI in Legal Practice" },
     { type: "image", src: "/images/RWD.png", alt: "Responsive Web Design Certificate" },
     { type: "image", src: "/images/A2.png", alt: "Certificate A2" },
     { type: "image", src: "/images/COE.png", alt: "Certificate of Excellence" },
@@ -153,11 +153,9 @@ const CertificateSection = memo(() => {
 
         {/* Single Card Container */}
         <div className="relative w-full max-w-4xl mx-auto">
-          {/* Navigation Arrows */}
-          <motion.button
+          {/* Navigation Arrows - Fixed position, no movement */}
+          <button
             onClick={goToPrevious}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
             className="absolute left-2 md:-left-16 top-1/2 -translate-y-1/2 z-20
               w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14
               rounded-full
@@ -168,18 +166,16 @@ const CertificateSection = memo(() => {
               text-white
               shadow-[0_0_20px_rgba(168,85,247,0.5)]
               hover:shadow-[0_0_30px_rgba(168,85,247,0.8)]
-              transition-all duration-300
+              transition-shadow duration-300
               group
             "
             aria-label="Previous certificate"
           >
-            <FiChevronLeft className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 group-hover:scale-110 transition-transform" />
-          </motion.button>
+            <FiChevronLeft className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 transition-opacity duration-300 group-hover:opacity-80" />
+          </button>
 
-          <motion.button
+          <button
             onClick={goToNext}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
             className="absolute right-2 md:-right-16 top-1/2 -translate-y-1/2 z-20
               w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14
               rounded-full
@@ -190,13 +186,13 @@ const CertificateSection = memo(() => {
               text-white
               shadow-[0_0_20px_rgba(168,85,247,0.5)]
               hover:shadow-[0_0_30px_rgba(168,85,247,0.8)]
-              transition-all duration-300
+              transition-shadow duration-300
               group
             "
             aria-label="Next certificate"
           >
-            <FiChevronRight className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 group-hover:scale-110 transition-transform" />
-          </motion.button>
+            <FiChevronRight className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 transition-opacity duration-300 group-hover:opacity-80" />
+          </button>
 
           {/* Certificate Card */}
           <AnimatePresence mode="wait">
@@ -240,10 +236,10 @@ const CertificateSection = memo(() => {
 
                 {/* Certificate Info */}
                 <div className="mt-6 text-center">
-                  <p className="text-purple-200 text-sm md:text-base font-medium">
+                  <p className="text-gray-800 dark:text-purple-200 text-base md:text-lg font-semibold">
                     {currentCertificate.alt}
                   </p>
-                  <p className="text-purple-300/60 text-xs md:text-sm mt-2">
+                  <p className="text-gray-600 dark:text-purple-300/80 text-sm md:text-base mt-2">
                     {currentIndex + 1} of {certificates.length}
                   </p>
                 </div>

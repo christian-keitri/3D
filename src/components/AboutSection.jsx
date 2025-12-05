@@ -46,33 +46,15 @@ const AboutSection = memo(() => {
       }
     )
 
-    // Stars floating + twinkling
+    // Stars - Simplified animation for performance
     starsRef.current.forEach((star, index) => {
-      const direction = index % 2 === 0 ? 1 : -1
-      const speed = 0.5 + Math.random() * 0.5
-
-      // Floating
+      // Only simple opacity animation
       gsap.to(star, {
-        x: `${direction * (80 + index * 10)}`,
-        y: `${direction * -40 - index * 5}`,
-        rotation: direction * 360,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: speed,
-        },
-      })
-
-      // Twinkling
-      gsap.to(star, {
-        scale: 1.4,
-        opacity: "+=0.3",
-        duration: 1.5,
+        opacity: "+=0.2",
+        duration: 2 + Math.random() * 2,
         yoyo: true,
         repeat: -1,
-        delay: index * 0.3,
+        delay: index * 0.5,
         ease: "sine.inOut",
       })
     })
@@ -98,9 +80,9 @@ const AboutSection = memo(() => {
       ref={sectionRef}
       className="h-screen relative overflow-hidden bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm"
     >
-      {/* Stars */}
+      {/* Stars - Reduced for performance */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(12)].map((_, i) => (
+        {[...Array(4)].map((_, i) => (
           <div
             ref={addToStars}
             key={`star-${i}`}
@@ -157,7 +139,7 @@ const AboutSection = memo(() => {
           {/* Profile Image */}
           <div className="relative w-full md:w-1/2 flex justify-center md:justify-end">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-2xl opacity-40 animate-pulse"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-2xl opacity-40"></div>
               <img
                 className="relative lg:h-[28rem] md:h-[20rem] h-[16rem] w-auto object-contain"
                 src="images/person.png"

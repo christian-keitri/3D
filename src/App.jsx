@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react"
 import Spline from '@splinetool/react-spline'
+import { motion } from 'framer-motion'
 
 // Lazy load components for better code splitting
 import Header from "./components/Header"
@@ -32,8 +33,24 @@ export default function App() {
             scene="https://prod.spline.design/UqPdLeYjLQDNoJsN/scene.splinecode" 
           />
         </div>
-        {/* Decorative overlay to cover watermark area */}
-        <div className="spline-watermark-cover" />
+        {/* Hire Me Button to cover watermark area */}
+        <motion.button
+          onClick={() => {
+            // Dispatch custom event to open contact form
+            window.dispatchEvent(new CustomEvent('openContactForm'));
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="spline-watermark-cover pointer-events-auto cursor-pointer"
+          style={{
+            position: 'absolute',
+            bottom: '20px',
+            right: '20px',
+            zIndex: 1000,
+          }}
+        >
+          <span className="text-white font-semibold">Hire Me</span>
+        </motion.button>
       </div>
 
       {/* Content with higher z-index */}
