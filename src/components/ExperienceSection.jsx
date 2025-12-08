@@ -273,109 +273,188 @@ const ExperienceSection = () => {
           </a>
         </div>
 
-        {/* Skills Solar System */}
+        {/* Skills Section with Profile Image */}
         <div className="mt-12 md:mt-16" ref={skillsRef}>
           <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
             Technical Skills
           </h3>
           <p className="text-center text-gray-400 mb-8 md:mb-12 text-sm">
-            Hover over skills to see proficiency level
+            Hover over skills to see proficiency level and experience
           </p>
           
-          {/* Solar System Container */}
-          <div className="relative w-full h-[500px] sm:h-[600px] md:h-[750px] flex items-center justify-center overflow-visible">
-            {/* Central Sun/Title */}
-            <div className="absolute inset-0 flex items-center justify-center z-10">
-              <div className="relative">
-                <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-purple-500/30 via-pink-500/30 to-purple-500/30 
-                backdrop-blur-md border-2 border-purple-400/50 flex items-center justify-center
-                shadow-[0_0_40px_rgba(168,85,247,0.5)]">
-                  <div className="text-center">
-                    <div className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
-                      Skills
-                    </div>
+          {/* Main Skills Container - Split Layout */}
+          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+            {/* Profile Image Section - Left Side */}
+            <div className="w-full lg:w-1/3 flex justify-center lg:justify-start">
+              <div className="relative group">
+                {/* Glow effects */}
+                <div className="absolute -inset-6 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
+                <div className="absolute -inset-3 bg-gradient-to-r from-purple-500/40 to-pink-500/40 rounded-full blur-xl opacity-40"></div>
+                
+                {/* Profile Image Container */}
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-2xl
+                  bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-purple-500/20 
+                  backdrop-blur-md border-4 border-purple-400/50
+                  shadow-[0_0_40px_rgba(168,85,247,0.5)]
+                  overflow-hidden
+                  transform group-hover:scale-105 transition-transform duration-500
+                  z-10">
+                  <img
+                    className="w-full h-full object-cover"
+                    src="images/person.png"
+                    alt="Christian Joshua Salapate - Full-Stack Developer"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-pink-500/10"></div>
+                  
+                  {/* Name badge */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4">
+                    <p className="text-white font-semibold text-sm md:text-base text-center">
+                      Christian Joshua Salapate
+                    </p>
+                    <p className="text-purple-300 text-xs md:text-sm text-center mt-1">
+                      Full-Stack Developer
+                    </p>
                   </div>
                 </div>
+                
+                {/* Decorative corner accents */}
+                <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-purple-400/50 rounded-tl-lg"></div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-pink-400/50 rounded-tr-lg"></div>
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-purple-400/50 rounded-bl-lg"></div>
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-pink-400/50 rounded-br-lg"></div>
               </div>
             </div>
 
-            {/* Orbital Rings - Visible orbits - Increased spacing with 4 orbits */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-              {/* Orbit 1 - Inner */}
-              <div className="absolute w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] rounded-full border-2 border-purple-500/20" />
-              {/* Orbit 2 - Middle Inner */}
-              <div className="absolute w-[300px] h-[300px] sm:w-[380px] sm:h-[380px] md:w-[480px] md:h-[480px] rounded-full border-2 border-purple-500/20" />
-              {/* Orbit 3 - Middle Outer */}
-              <div className="absolute w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] md:w-[640px] md:h-[640px] rounded-full border-2 border-purple-500/20" />
-              {/* Orbit 4 - Outer */}
-              <div className="absolute w-[500px] h-[500px] sm:w-[620px] sm:h-[620px] md:w-[800px] md:h-[800px] rounded-full border-2 border-purple-500/20" />
-            </div>
-
-            {/* Orbiting Skills - Distributed across 4 orbits for better spacing */}
-            <div className="absolute inset-0">
-              {skills.map((skill, i) => {
-                // Distribute skills across 4 orbits to reduce crowding
-                const orbitIndex = i % 4 // 0, 1, 2, or 3
-                const skillsPerOrbit = Math.ceil(skills.length / 4)
-                const positionInOrbit = Math.floor(i / 4)
-                
-                // Calculate responsive radius for each orbit - increased spacing
-                let baseRadius
-                if (windowWidth < 640) {
-                  baseRadius = [100, 150, 200, 250] // Mobile - 4 orbits
-                } else if (windowWidth < 768) {
-                  baseRadius = [130, 190, 250, 310] // Tablet - 4 orbits
-                } else {
-                  baseRadius = [160, 240, 320, 400] // Desktop - 4 orbits
-                }
-                
-                const radius = baseRadius[orbitIndex]
-                
-                // Calculate angle - offset each orbit slightly and space skills evenly
-                const angleOffset = orbitIndex * 20 // More rotation per orbit for better spacing
-                const angleStep = 360 / skillsPerOrbit
-                const angle = (positionInOrbit * angleStep + angleOffset) % 360
-                
-                const x = Math.cos((angle * Math.PI) / 180) * radius
-                const y = Math.sin((angle * Math.PI) / 180) * radius
-                
-                return (
-                  <div
-                    key={i}
-                    onMouseEnter={() => setHoveredSkill(i)}
-                    onMouseLeave={() => setHoveredSkill(null)}
-                    className="skill-item absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-                    w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full
-                    bg-purple-800/30 backdrop-blur-sm text-purple-200 border-2 border-purple-600/40 
-                    hover:bg-purple-700/50 hover:border-purple-500/60
-                    hover:shadow-[0_0_25px_rgba(168,85,247,0.8)]
-                    transition-all duration-300
-                    flex flex-col items-center justify-center gap-0.5 cursor-pointer
-                    group/skill z-20"
-                    style={{
-                      transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
-                    }}
-                  >
-                    <div className="text-sm sm:text-base md:text-lg transform group-hover/skill:scale-110 transition-transform duration-300">
-                      {skill.icon}
-                    </div>
-                    <span className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-center leading-tight px-0.5">{skill.name}</span>
-                    
-                    {/* Tooltip */}
-                    {hoveredSkill === i && skill.proficiency && (
-                      <div className="absolute -top-20 left-1/2 transform -translate-x-1/2
-                      bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
-                      border border-purple-500/50 shadow-xl z-30 whitespace-nowrap
-                      animate-fadeIn">
-                        <div className="font-semibold">{skill.proficiency}</div>
-                        {skill.years && <div className="text-purple-300">{skill.years} years</div>}
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
-                        w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
-                      </div>
-                    )}
+            {/* Skills Grid - Right Side */}
+            <div className="flex-1 w-full">
+              {/* Organized Skills by Category */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Frontend Skills */}
+                <div className="skill-item bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300">
+                  <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
+                    <span className="w-1 h-5 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></span>
+                    Frontend
+                  </h4>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                    {skills.filter(s => ['React', 'TypeScript', 'Next.js', 'TailwindCSS', 'Svelte', 'JavaScript'].includes(s.name)).map((skill) => {
+                      const skillIndex = skills.findIndex(s => s.name === skill.name)
+                      return (
+                        <div
+                          key={skill.name}
+                          onMouseEnter={() => setHoveredSkill(skillIndex)}
+                          onMouseLeave={() => setHoveredSkill(null)}
+                          className="relative group/skill flex flex-col items-center gap-2 p-3 rounded-lg
+                          bg-purple-900/20 border border-purple-600/20
+                          hover:bg-purple-800/30 hover:border-purple-500/40
+                          hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]
+                          transition-all duration-300 cursor-pointer"
+                        >
+                          <div className="text-2xl md:text-3xl transform group-hover/skill:scale-110 transition-transform duration-300 text-purple-300">
+                            {skill.icon || <span className="text-xs font-bold">JS</span>}
+                          </div>
+                          <span className="text-[10px] md:text-xs font-medium text-center text-purple-200">{skill.name}</span>
+                          {hoveredSkill === skillIndex && skill.proficiency && (
+                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2
+                            bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
+                            border border-purple-500/50 shadow-xl z-30 whitespace-nowrap
+                            animate-fadeIn">
+                              <div className="font-semibold">{skill.proficiency}</div>
+                              {skill.years && <div className="text-purple-300">{skill.years} years</div>}
+                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
+                              w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
                   </div>
-                )
-              })}
+                </div>
+
+                {/* Backend & Mobile Skills */}
+                <div className="skill-item bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300">
+                  <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
+                    <span className="w-1 h-5 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></span>
+                    Backend & Mobile
+                  </h4>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                    {skills.filter(s => ['Node.js', 'FastAPI', 'Python', 'Flutter', 'Prisma'].includes(s.name)).map((skill) => {
+                      const skillIndex = skills.findIndex(s => s.name === skill.name)
+                      return (
+                        <div
+                          key={skill.name}
+                          onMouseEnter={() => setHoveredSkill(skillIndex)}
+                          onMouseLeave={() => setHoveredSkill(null)}
+                          className="relative group/skill flex flex-col items-center gap-2 p-3 rounded-lg
+                          bg-purple-900/20 border border-purple-600/20
+                          hover:bg-purple-800/30 hover:border-purple-500/40
+                          hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]
+                          transition-all duration-300 cursor-pointer"
+                        >
+                          <div className="text-2xl md:text-3xl transform group-hover/skill:scale-110 transition-transform duration-300 text-purple-300">
+                            {skill.icon}
+                          </div>
+                          <span className="text-[10px] md:text-xs font-medium text-center text-purple-200">{skill.name}</span>
+                          {hoveredSkill === skillIndex && skill.proficiency && (
+                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2
+                            bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
+                            border border-purple-500/50 shadow-xl z-30 whitespace-nowrap
+                            animate-fadeIn">
+                              <div className="font-semibold">{skill.proficiency}</div>
+                              {skill.years && <div className="text-purple-300">{skill.years} years</div>}
+                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
+                              w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                {/* DevOps & Tools */}
+                <div className="skill-item bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 md:col-span-2">
+                  <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
+                    <span className="w-1 h-5 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></span>
+                    DevOps & Tools
+                  </h4>
+                  <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+                    {skills.filter(s => ['Docker', 'Git', 'Figma', 'n8n', 'More...'].includes(s.name)).map((skill) => {
+                      const skillIndex = skills.findIndex(s => s.name === skill.name)
+                      return (
+                        <div
+                          key={skill.name}
+                          onMouseEnter={() => setHoveredSkill(skillIndex)}
+                          onMouseLeave={() => setHoveredSkill(null)}
+                          className="relative group/skill flex flex-col items-center gap-2 p-3 rounded-lg
+                          bg-purple-900/20 border border-purple-600/20
+                          hover:bg-purple-800/30 hover:border-purple-500/40
+                          hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]
+                          transition-all duration-300 cursor-pointer"
+                        >
+                          <div className="text-2xl md:text-3xl transform group-hover/skill:scale-110 transition-transform duration-300 text-purple-300">
+                            {skill.icon}
+                          </div>
+                          <span className="text-[10px] md:text-xs font-medium text-center text-purple-200">{skill.name}</span>
+                          {hoveredSkill === skillIndex && skill.proficiency && (
+                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2
+                            bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
+                            border border-purple-500/50 shadow-xl z-30 whitespace-nowrap
+                            animate-fadeIn">
+                              <div className="font-semibold">{skill.proficiency}</div>
+                              {skill.years && <div className="text-purple-300">{skill.years} years</div>}
+                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
+                              w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

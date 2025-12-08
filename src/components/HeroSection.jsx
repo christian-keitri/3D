@@ -91,8 +91,40 @@ const HeroSection = () => {
           }}
           className="text-base sm:text-lg md:text-xl lg:text-2xl text-purple-200 max-w-3xl mx-auto leading-relaxed mb-6 md:mb-8"
         >
-          I build fast, production-grade websites and web apps with precision and purpose. Every line of code reflects clean architecture, clear communication, and a relentless drive to deliver—on time, every time.
+          Full-Stack Developer specializing in scalable web & mobile applications. I transform complex requirements into elegant solutions, delivering production-ready code that drives business results—on time, every time.
         </motion.p>
+
+        {/* Key Metrics/Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.6,
+            delay: 0.8,
+          }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 md:mt-12 w-full max-w-4xl"
+        >
+          {[
+            { number: "5+", label: "Production Apps" },
+            { number: "1000+", label: "Active Users" },
+            { number: "40%", label: "Performance Boost" },
+            { number: "100%", label: "On-Time Delivery" },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white/5 backdrop-blur-md rounded-xl p-4 md:p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300"
+            >
+              <div className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                {stat.number}
+              </div>
+              <div className="text-xs md:text-sm text-purple-300 mt-2">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* CTA Button */}
         <motion.div

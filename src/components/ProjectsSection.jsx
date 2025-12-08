@@ -19,7 +19,9 @@ const ProjectsSection = memo(() => {
       imageSrc: "/images/project-5.png",
       link: "https://drive.google.com/uc?export=download&id=1nFwYyyWKRlbpIr0fPDoBVOs0e8nrNvWY",
       description: "A full-featured food delivery application with real-time tracking",
-      tech: ["React", "Node.js", "MongoDB"]
+      tech: ["React", "Node.js", "MongoDB"],
+      impact: "Real-time order tracking system",
+      challenge: "Built scalable backend handling 1000+ concurrent orders"
     },
     {
       id: 2,
@@ -27,7 +29,9 @@ const ProjectsSection = memo(() => {
       imageSrc: "/images/project-1.png",
       link: "https://storied-taiyaki-06f63f.netlify.app",
       description: "Modern portfolio website showcasing my projects and skills",
-      tech: ["React", "GSAP", "TailwindCSS"]
+      tech: ["React", "GSAP", "TailwindCSS"],
+      impact: "Showcasing professional work with 3D animations",
+      challenge: "Optimized performance with lazy loading and code splitting"
     },
     {
       id: 3,
@@ -35,7 +39,9 @@ const ProjectsSection = memo(() => {
       imageSrc: "/images/project-2.png",
       link: "https://think-board-ene0.onrender.com/home",
       description: "Collaborative whiteboard application for team brainstorming",
-      tech: ["React", "WebSocket", "Canvas API"]
+      tech: ["React", "WebSocket", "Canvas API"],
+      impact: "Real-time collaboration for remote teams",
+      challenge: "Implemented WebSocket for seamless multi-user experience"
     },
     {
       id: 4,
@@ -43,7 +49,9 @@ const ProjectsSection = memo(() => {
       imageSrc: "/images/project-3.png",
       link: "https://bob-ai-summarizer.vercel.app",
       description: "AI-powered text summarization tool using advanced NLP",
-      tech: ["Next.js", "OpenAI", "TypeScript"]
+      tech: ["Next.js", "OpenAI", "TypeScript"],
+      impact: "Efficient content processing with AI integration",
+      challenge: "Optimized API calls and response handling for better UX"
     },
     {
       id: 5,
@@ -51,7 +59,9 @@ const ProjectsSection = memo(() => {
       imageSrc: "/images/project-4.png",
       link: "https://netflix-clone-1-cgyh.onrender.com/",
       description: "Full-stack Netflix clone with video streaming capabilities",
-      tech: ["React", "Firebase", "TMDB API"]
+      tech: ["React", "Firebase", "TMDB API"],
+      impact: "Feature-rich streaming platform with user authentication",
+      challenge: "Integrated Firebase for secure authentication and data management"
     },
   ], [])
 
@@ -243,9 +253,29 @@ const ProjectsSection = memo(() => {
                       <FiExternalLink className="text-purple-400 text-xl transform group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300" />
                     </div>
 
-                    <p className="text-gray-300 text-sm md:text-base mb-4 leading-relaxed line-clamp-2">
+                    <p className="text-gray-300 text-sm md:text-base mb-3 leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
+
+                    {/* Impact & Challenge */}
+                    {project.impact && (
+                      <div className="mb-3 space-y-2">
+                        <div className="flex items-start gap-2">
+                          <span className="text-purple-400 text-xs mt-0.5">✓</span>
+                          <p className="text-xs text-purple-200/80 leading-relaxed">
+                            <span className="font-semibold text-purple-300">Impact:</span> {project.impact}
+                          </p>
+                        </div>
+                        {project.challenge && (
+                          <div className="flex items-start gap-2">
+                            <span className="text-pink-400 text-xs mt-0.5">⚡</span>
+                            <p className="text-xs text-purple-200/80 leading-relaxed">
+                              <span className="font-semibold text-pink-300">Challenge:</span> {project.challenge}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {/* Tech stack */}
                     <div className="flex flex-wrap gap-2 mb-4">

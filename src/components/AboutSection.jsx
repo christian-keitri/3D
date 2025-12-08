@@ -1,6 +1,7 @@
 import { useRef, useEffect, memo } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import GitHubStats from "./GitHubStats"
 
 const AboutSection = memo(() => {
   const sectionRef = useRef(null)
@@ -78,7 +79,7 @@ const AboutSection = memo(() => {
     <section
       id="about"
       ref={sectionRef}
-      className="h-screen relative overflow-hidden bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm"
+      className="min-h-screen relative overflow-hidden bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm"
     >
       {/* Stars - Reduced for performance */}
       <div className="absolute inset-0 overflow-hidden">
@@ -110,45 +111,10 @@ const AboutSection = memo(() => {
 
         <div
           ref={introRef}
-          className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-center md:justify-between gap-8 md:gap-12 lg:gap-16"
+          className="w-full max-w-6xl"
         >
-          <div className="w-full md:w-1/2 lg:max-w-xl text-purple-200 tracking-wide leading-relaxed flex flex-col justify-center">
-            <p className="text-lg md:text-2xl font-semibold mb-4">
-              👋 Hi, I'm <span className="text-purple-400">Christian</span>
-            </p>
-            <ul className="space-y-3 text-sm md:text-lg">
-              <li>⚡ Electronics Technician → Full-Stack Developer</li>
-              <li>🤖 Passion for automation & scalable systems</li>
-              <li>📱 Experienced in building web & mobile apps</li>
-              <li>🚀 Love blending engineering precision with creativity</li>
-            </ul>
-
-            {/* CTA */}
-            <button
-              onClick={() => window.open("https://www.facebook.com/christian.cj.768517", "_blank")}
-              className="mt-8 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
-            text-white font-semibold rounded-xl shadow-lg
-            hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-            transform hover:scale-105 transition-all duration-300
-            border border-purple-400/30">
-
-              Let’s Connect ✨
-            </button>
-          </div>
-
-          {/* Profile Image */}
-          <div className="relative w-full md:w-1/2 flex justify-center md:justify-end">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-2xl opacity-40"></div>
-              <img
-                className="relative lg:h-[28rem] md:h-[20rem] h-[16rem] w-auto object-contain"
-                src="images/person.png"
-                alt="profile-img"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </div>
+          {/* GitHub Stats Display */}
+          <GitHubStats username="christian-keitri" />
         </div>
       </div>
     </section>

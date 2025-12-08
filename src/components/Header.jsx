@@ -60,6 +60,7 @@ const Header = () => {
   const navLinks = useMemo(() => [
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
+    { name: "Skills", href: "#competencies" },
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
