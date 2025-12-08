@@ -9,6 +9,7 @@ import CustomCursor from "./components/CustomCursor"
 import ProgressBar from "./components/ProgressBar"
 
 const AboutSection = lazy(() => import("./components/AboutSection"))
+const CoreCompetencies = lazy(() => import("./components/CoreCompetencies"))
 const ProjectsSection = lazy(() => import("./components/ProjectsSection"))
 const ContactSection = lazy(() => import("./components/ContactSection"))
 const Footer = lazy(() => import("./components/Footer"))
@@ -61,6 +62,7 @@ export default function App() {
         
         <Suspense fallback={<SectionLoader />}>
           <AboutSection />
+          <CoreCompetencies />
           <ExperienceSection />
           <Certificate />
           <ProjectsSection />
@@ -74,4 +76,5 @@ export default function App() {
     </>
   )
 }
+
 
