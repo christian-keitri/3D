@@ -45,7 +45,7 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="hero"
-      className="h-screen bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm flex items-center justify-center lg:px-24 px-6 md:px-10 relative overflow-hidden"
+      className="pt-20 md:pt-24 h-screen bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm flex items-center justify-center lg:px-24 px-6 md:px-10 relative overflow-hidden"
     >
       {/* Stars Background - Reduced for performance */}
       <div className="absolute inset-0 overflow-hidden">
