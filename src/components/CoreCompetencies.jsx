@@ -7,7 +7,11 @@ import {
   FaNodeJs, 
   FaDocker, 
   FaGitAlt,
-  FaMobile
+  FaMobile,
+  FaDatabase,
+  FaCode,
+  FaSync,
+  FaServer
 } from 'react-icons/fa'
 import { 
   SiTypescript, 
@@ -16,7 +20,14 @@ import {
   SiNextdotjs,
   SiTailwindcss,
   SiPrisma,
-  SiPython
+  SiPython,
+  SiJavascript,
+  SiSvelte,
+  SiFigma,
+  SiN8N,
+  SiTestinglibrary,
+  SiDotnet,
+  SiAmazonwebservices
 } from 'react-icons/si'
 
 const CoreCompetencies = memo(() => {
@@ -24,18 +35,48 @@ const CoreCompetencies = memo(() => {
   const titleRef = useRef(null)
   const cardsRef = useRef(null)
 
+  // Skill icon mapping
+  const skillIcons = {
+    "JavaScript": <SiJavascript className="text-lg" />,
+    "React": <FaReact className="text-lg" />,
+    "TypeScript": <SiTypescript className="text-lg" />,
+    "Next.js": <SiNextdotjs className="text-lg" />,
+    "Svelte": <SiSvelte className="text-lg" />,
+    "TailwindCSS": <SiTailwindcss className="text-lg" />,
+    "GSAP": <FaCode className="text-lg" />,
+    "FastAPI": <SiFastapi className="text-lg" />,
+    "Node.js": <FaNodeJs className="text-lg" />,
+    "Python": <SiPython className="text-lg" />,
+    "Prisma": <SiPrisma className="text-lg" />,
+    "REST APIs": <FaServer className="text-lg" />,
+    "Database Design": <FaDatabase className="text-lg" />,
+    ".NET": <SiDotnet className="text-lg" />,
+    "C#": <SiDotnet className="text-lg" />,
+    "Entity Framework": <SiDotnet className="text-lg" />,
+    "Flutter": <SiFlutter className="text-lg" />,
+    "Cross-platform": <FaMobile className="text-lg" />,
+    "Mobile UI/UX": <FaMobile className="text-lg" />,
+    "Docker": <FaDocker className="text-lg" />,
+    "CI/CD": <FaSync className="text-lg" />,
+    "Git": <FaGitAlt className="text-lg" />,
+    "Figma": <SiFigma className="text-lg" />,
+    "n8n": <SiN8N className="text-lg" />,
+    "Testing": <SiTestinglibrary className="text-lg" />,
+    "AWS": <SiAmazonwebservices className="text-lg" />,
+  }
+
   const competencies = [
     {
       category: "Frontend Development",
       icon: <FaReact className="text-4xl" />,
-      skills: ["React", "TypeScript", "Next.js", "TailwindCSS", "GSAP"],
+      skills: ["JavaScript", "React", "TypeScript", "Next.js", "Svelte", "TailwindCSS", "GSAP"],
       description: "Building responsive, performant user interfaces",
       color: "from-blue-500 to-cyan-500"
     },
     {
       category: "Backend Development",
       icon: <FaNodeJs className="text-4xl" />,
-      skills: ["FastAPI", "Node.js", "Python", "REST APIs", "Database Design"],
+      skills: ["FastAPI", "Node.js", "Python", ".NET", "C#", "Entity Framework", "Prisma", "REST APIs", "Database Design"],
       description: "Scalable server-side solutions and APIs",
       color: "from-green-500 to-emerald-500"
     },
@@ -49,7 +90,7 @@ const CoreCompetencies = memo(() => {
     {
       category: "DevOps & Tools",
       icon: <FaDocker className="text-4xl" />,
-      skills: ["Docker", "CI/CD", "Git", "Prisma", "Testing"],
+      skills: ["Docker", "AWS", "CI/CD", "Git", "Figma", "n8n", "Testing"],
       description: "Streamlined deployment and development workflows",
       color: "from-orange-500 to-red-500"
     },
@@ -170,11 +211,17 @@ const CoreCompetencies = memo(() => {
                   {comp.skills.map((skill, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1.5 text-xs md:text-sm bg-purple-900/40 text-purple-200 rounded-full
+                      className="inline-flex items-center gap-2 px-3 py-1.5 text-xs md:text-sm bg-purple-900/40 text-purple-200 rounded-full
                         border border-purple-600/30 group-hover:bg-purple-800/50 
-                        group-hover:border-purple-500/50 transition-all duration-200"
+                        group-hover:border-purple-500/50 transition-all duration-200
+                        hover:scale-105 hover:shadow-[0_0_10px_rgba(168,85,247,0.3)]"
                     >
-                      {skill}
+                      {skillIcons[skill] && (
+                        <span className="flex-shrink-0">
+                          {skillIcons[skill]}
+                        </span>
+                      )}
+                      <span>{skill}</span>
                     </span>
                   ))}
                 </div>
