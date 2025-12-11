@@ -78,7 +78,7 @@ const HeroSection = () => {
           }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-5xl font-bold z-10 mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg leading-tight"
         >
-          Build Fast <br /> Reliable Results
+          Build Fast Reliable Results
         </motion.h1>
 
         <motion.p
