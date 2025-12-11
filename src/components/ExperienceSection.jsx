@@ -1,9 +1,7 @@
 import { useRef, useEffect, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { FaReact, FaDocker, FaNodeJs, FaGitAlt, FaChevronDown, FaChevronUp, FaFileDownload } from "react-icons/fa"
-import { SiTypescript, SiPrisma, SiTailwindcss, SiFlutter, SiFastapi, SiNextdotjs, SiSvelte, SiPython, SiFigma, SiN8N } from "react-icons/si"
-import { FiMoreHorizontal } from "react-icons/fi"
+import { FaChevronDown, FaChevronUp, FaFileDownload } from "react-icons/fa"
 
 const experiences = [
   {
@@ -39,39 +37,10 @@ const experiences = [
   },
 ]
 
-const skills = [
-  { name: "JavaScript", icon: <></>, proficiency: "Expert", years: "3+" },
-  { name: "TypeScript", icon: <SiTypescript />, proficiency: "Advanced", years: "2+" },
-  { name: "React", icon: <FaReact />, proficiency: "Expert", years: "3+" },
-  { name: "Flutter", icon: <SiFlutter />, proficiency: "Advanced", years: "1+" },
-  { name: "FastAPI", icon: <SiFastapi />, proficiency: "Advanced", years: "1+" },
-  { name: "Node.js", icon: <FaNodeJs />, proficiency: "Advanced", years: "2+" },
-  { name: "Prisma", icon: <SiPrisma />, proficiency: "Intermediate", years: "1+" },
-  { name: "Docker", icon: <FaDocker />, proficiency: "Advanced", years: "1+" },
-  { name: "TailwindCSS", icon: <SiTailwindcss />, proficiency: "Expert", years: "3+" },
-  { name: "Git", icon: <FaGitAlt />, proficiency: "Expert", years: "3+" },
-  { name: "Svelte", icon: <SiSvelte />, proficiency: "Intermediate", years: "1+" },
-  { name: "Next.js", icon: <SiNextdotjs />, proficiency: "Advanced", years: "2+" },
-  { name: "Python", icon: <SiPython />, proficiency: "Advanced", years: "2+" },
-  { name: "Figma", icon: <SiFigma />, proficiency: "Intermediate", years: "1+" },
-  { name: "n8n", icon: <SiN8N />, proficiency: "Intermediate", years: "1+" },
-  { name: "More...", icon: <FiMoreHorizontal />, proficiency: "", years: "" },
-]
 
 const ExperienceSection = () => {
   const sectionRef = useRef(null)
   const [expandedCards, setExpandedCards] = useState({})
-  const [hoveredSkill, setHoveredSkill] = useState(null)
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024)
-  const skillsRef = useRef(null)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth)
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
 
   const toggleCard = (index) => {
     setExpandedCards(prev => ({
@@ -101,28 +70,6 @@ const ExperienceSection = () => {
         },
       }
     )
-
-    // Skills animation - Simple fade in, no complex animations
-    if (skillsRef.current) {
-      gsap.fromTo(
-        skillsRef.current.querySelectorAll(".skill-item"),
-        { 
-          opacity: 0, 
-          scale: 0.5
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          stagger: 0.03,
-          duration: 0.5,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: skillsRef.current,
-            start: "top 80%",
-          },
-        }
-      )
-    }
 
     // Title animation
     const title = sectionRef.current.querySelector("h2")
@@ -271,192 +218,6 @@ const ExperienceSection = () => {
             <FaFileDownload className="text-xl" />
             <span>View Full Resume</span>
           </a>
-        </div>
-
-        {/* Skills Section with Profile Image */}
-        <div className="mt-12 md:mt-16" ref={skillsRef}>
-          <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
-            Technical Skills
-          </h3>
-          <p className="text-center text-gray-400 mb-8 md:mb-12 text-sm">
-            Hover over skills to see proficiency level and experience
-          </p>
-          
-          {/* Main Skills Container - Split Layout */}
-          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
-            {/* Profile Image Section - Left Side */}
-            <div className="w-full lg:w-1/3 flex justify-center lg:justify-start">
-              <div className="relative group">
-                {/* Glow effects */}
-                <div className="absolute -inset-6 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
-                <div className="absolute -inset-3 bg-gradient-to-r from-purple-500/40 to-pink-500/40 rounded-full blur-xl opacity-40"></div>
-                
-                {/* Profile Image Container */}
-                <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-2xl
-                  bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-purple-500/20 
-                  backdrop-blur-md border-4 border-purple-400/50
-                  shadow-[0_0_40px_rgba(168,85,247,0.5)]
-                  overflow-hidden
-                  transform group-hover:scale-105 transition-transform duration-500
-                  z-10">
-                  <img
-                    className="w-full h-full object-cover"
-                    src="images/person.png"
-                    alt="Christian Joshua Salapate - Full-Stack Developer"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-pink-500/10"></div>
-                  
-                  {/* Name badge */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4">
-                    <p className="text-white font-semibold text-sm md:text-base text-center">
-                      Christian Joshua Salapate
-                    </p>
-                    <p className="text-purple-300 text-xs md:text-sm text-center mt-1">
-                      Full-Stack Developer
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Decorative corner accents */}
-                <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-purple-400/50 rounded-tl-lg"></div>
-                <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-pink-400/50 rounded-tr-lg"></div>
-                <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-purple-400/50 rounded-bl-lg"></div>
-                <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-pink-400/50 rounded-br-lg"></div>
-              </div>
-            </div>
-
-            {/* Skills Grid - Right Side */}
-            <div className="flex-1 w-full">
-              {/* Organized Skills by Category */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Frontend Skills */}
-                <div className="skill-item bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300">
-                  <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
-                    <span className="w-1 h-5 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></span>
-                    Frontend
-                  </h4>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                    {skills.filter(s => ['React', 'TypeScript', 'Next.js', 'TailwindCSS', 'Svelte', 'JavaScript'].includes(s.name)).map((skill) => {
-                      const skillIndex = skills.findIndex(s => s.name === skill.name)
-                      return (
-                        <div
-                          key={skill.name}
-                          onMouseEnter={() => setHoveredSkill(skillIndex)}
-                          onMouseLeave={() => setHoveredSkill(null)}
-                          className="relative group/skill flex flex-col items-center gap-2 p-3 rounded-lg
-                          bg-purple-900/20 border border-purple-600/20
-                          hover:bg-purple-800/30 hover:border-purple-500/40
-                          hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]
-                          transition-all duration-300 cursor-pointer"
-                        >
-                          <div className="text-2xl md:text-3xl transform group-hover/skill:scale-110 transition-transform duration-300 text-purple-300">
-                            {skill.icon || <span className="text-xs font-bold">JS</span>}
-                          </div>
-                          <span className="text-[10px] md:text-xs font-medium text-center text-purple-200">{skill.name}</span>
-                          {hoveredSkill === skillIndex && skill.proficiency && (
-                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2
-                            bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
-                            border border-purple-500/50 shadow-xl z-30 whitespace-nowrap
-                            animate-fadeIn">
-                              <div className="font-semibold">{skill.proficiency}</div>
-                              {skill.years && <div className="text-purple-300">{skill.years} years</div>}
-                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
-                              w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                {/* Backend & Mobile Skills */}
-                <div className="skill-item bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300">
-                  <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
-                    <span className="w-1 h-5 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></span>
-                    Backend & Mobile
-                  </h4>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                    {skills.filter(s => ['Node.js', 'FastAPI', 'Python', 'Flutter', 'Prisma'].includes(s.name)).map((skill) => {
-                      const skillIndex = skills.findIndex(s => s.name === skill.name)
-                      return (
-                        <div
-                          key={skill.name}
-                          onMouseEnter={() => setHoveredSkill(skillIndex)}
-                          onMouseLeave={() => setHoveredSkill(null)}
-                          className="relative group/skill flex flex-col items-center gap-2 p-3 rounded-lg
-                          bg-purple-900/20 border border-purple-600/20
-                          hover:bg-purple-800/30 hover:border-purple-500/40
-                          hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]
-                          transition-all duration-300 cursor-pointer"
-                        >
-                          <div className="text-2xl md:text-3xl transform group-hover/skill:scale-110 transition-transform duration-300 text-purple-300">
-                            {skill.icon}
-                          </div>
-                          <span className="text-[10px] md:text-xs font-medium text-center text-purple-200">{skill.name}</span>
-                          {hoveredSkill === skillIndex && skill.proficiency && (
-                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2
-                            bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
-                            border border-purple-500/50 shadow-xl z-30 whitespace-nowrap
-                            animate-fadeIn">
-                              <div className="font-semibold">{skill.proficiency}</div>
-                              {skill.years && <div className="text-purple-300">{skill.years} years</div>}
-                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
-                              w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                {/* DevOps & Tools */}
-                <div className="skill-item bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 md:col-span-2">
-                  <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
-                    <span className="w-1 h-5 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></span>
-                    DevOps & Tools
-                  </h4>
-                  <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
-                    {skills.filter(s => ['Docker', 'Git', 'Figma', 'n8n', 'More...'].includes(s.name)).map((skill) => {
-                      const skillIndex = skills.findIndex(s => s.name === skill.name)
-                      return (
-                        <div
-                          key={skill.name}
-                          onMouseEnter={() => setHoveredSkill(skillIndex)}
-                          onMouseLeave={() => setHoveredSkill(null)}
-                          className="relative group/skill flex flex-col items-center gap-2 p-3 rounded-lg
-                          bg-purple-900/20 border border-purple-600/20
-                          hover:bg-purple-800/30 hover:border-purple-500/40
-                          hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]
-                          transition-all duration-300 cursor-pointer"
-                        >
-                          <div className="text-2xl md:text-3xl transform group-hover/skill:scale-110 transition-transform duration-300 text-purple-300">
-                            {skill.icon}
-                          </div>
-                          <span className="text-[10px] md:text-xs font-medium text-center text-purple-200">{skill.name}</span>
-                          {hoveredSkill === skillIndex && skill.proficiency && (
-                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2
-                            bg-purple-900/95 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg
-                            border border-purple-500/50 shadow-xl z-30 whitespace-nowrap
-                            animate-fadeIn">
-                              <div className="font-semibold">{skill.proficiency}</div>
-                              {skill.years && <div className="text-purple-300">{skill.years} years</div>}
-                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full
-                              w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-purple-900/95" />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
