@@ -79,7 +79,7 @@ const CustomCursor = () => {
   return (
     <>
       {/*Main Cursor Dot */}
-      <dev
+      <div
         ref={cursorRef}
         className="fixed top-0 left-0 w-[20px] h-[20px] bg-white rounded-full pointer-events-none z-[999] mix-blend-difference"
       />
