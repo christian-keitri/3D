@@ -76,7 +76,7 @@ const HeroSection = () => {
             duration: 0.6,
             delay: 0.2,
           }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold z-10 mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-5xl font-bold z-10 mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg leading-tight"
         >
           Build Fast <br /> Reliable Results
         </motion.h1>
@@ -94,62 +94,70 @@ const HeroSection = () => {
           Full-Stack Developer specializing in scalable web & mobile applications. I transform complex requirements into elegant solutions, delivering production-ready code that drives business results—on time, every time.
         </motion.p>
 
-        {/* Key Metrics/Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.6,
-            delay: 0.8,
-          }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 md:mt-12 w-full max-w-4xl"
-        >
-          {[
-            { number: "5+", label: "Production Apps" },
-            { number: "1000+", label: "Active Users" },
-            { number: "40%", label: "Performance Boost" },
-            { number: "100%", label: "On-Time Delivery" },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white/5 backdrop-blur-md rounded-xl p-4 md:p-6 border border-purple-600/30 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300"
-            >
-              <div className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {stat.number}
-              </div>
-              <div className="text-xs md:text-sm text-purple-300 mt-2">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Profile Image */}
+        <div className="relative mt-8 md:mt-12">
+          {/* Glow effects */}
+          <div className="absolute -inset-8 bg-gradient-to-r from-purple-600 to-pink-400 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/40 to-pink-500/40 rounded-full blur-2xl opacity-40"></div>
+          
+          {/* Image Container */}
+          <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto rounded-2xl
+            overflow-hidden
+            z-10">
+            <img
+              className="w-full h-full object-cover rounded-2xl"
+              src="/images/person.png"
+              alt="Full-Stack Developer"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </div>
 
-        {/* CTA Button */}
+        {/* Minimal Bubble Buttons - Below image */}
         <motion.div
           ref={buttonRef}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.6,
             delay: 0.6,
           }}
-          className="mt-4 md:mt-8"
+          className="flex flex-row items-center justify-center gap-3 mt-6 z-20"
         >
+          {/* View My Work Button */}
           <motion.a
             href="#projects"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600
-            text-white font-semibold rounded-xl shadow-lg
-            hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-purple-600/90 to-pink-600/90
+            text-white text-sm font-medium rounded-full shadow-lg backdrop-blur-md
+            hover:from-purple-500 hover:to-pink-500 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]
             transition-all duration-300
-            border border-purple-400/30"
+            border border-white/30
+            whitespace-nowrap"
           >
-            View My Work
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span>View Work</span>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </motion.a>
+          
+          {/* Hire Me Button */}
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-pink-600/90 to-purple-600/90
+            text-white text-sm font-medium rounded-full shadow-lg backdrop-blur-md
+            hover:from-pink-500 hover:to-purple-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.5)]
+            transition-all duration-300
+            border border-white/30
+            whitespace-nowrap"
+          >
+            <span>Hire Me</span>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </motion.a>
         </motion.div>
