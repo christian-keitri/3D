@@ -45,7 +45,7 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="hero"
-      className="pt-24 md:pt-24 h-screen bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm flex items-center justify-center lg:px-24 px-6 md:px-10 relative overflow-hidden"
+      className="pt-20 md:pt-24 h-screen bg-gradient-to-b from-black/70 via-[#1a093b]/70 to-[#9a74cf50]/70 backdrop-blur-sm flex items-center justify-center lg:px-24 px-6 md:px-10 relative overflow-hidden"
     >
       {/* Stars Background - Reduced for performance */}
       <div className="absolute inset-0 overflow-hidden">
@@ -76,7 +76,7 @@ const HeroSection = () => {
             duration: 0.6,
             delay: 0.2,
           }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-5xl font-bold z-10 mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-5xl font-bold z-10 mb-4 mt- 4 md:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-200 bg-clip-text text-transparent drop-shadow-lg leading-tight"
         >
           Build Fast Reliable Results
         </motion.h1>
