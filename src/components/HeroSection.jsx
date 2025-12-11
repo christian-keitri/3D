@@ -67,7 +67,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content Section - Centered and adjusted */}
-      <div className="z-40 w-full max-w-4xl mx-auto relative flex flex-col items-center justify-center text-center">
+      <div className="z-40 w-full max-w-4xl mx-auto relative flex flex-col items-center justify-center text-center pb-20">
         <motion.h1
           ref={titleRef}
           initial={{ opacity: 0, y: 30 }}
