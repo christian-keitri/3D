@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { motion } from 'framer-motion'
-import { FiGithub, FiStar, FiGitBranch, FiGitCommit, FiCode } from 'react-icons/fi'
+import { FiGithub, FiStar, FiGitBranch, FiGitCommit, FiCode, FiGitPullRequest, FiMessageCircle } from 'react-icons/fi'
 
 const GitHubStats = ({ username = 'christian-keitri' }) => {
   const [stats, setStats] = useState({
@@ -264,6 +264,130 @@ const GitHubStats = ({ username = 'christian-keitri' }) => {
             <div className="w-3 h-3 rounded-sm bg-green-400 border border-green-300" />
           </div>
           <span>More</span>
+        </div>
+      </div>
+
+      {/* Contribution Breakdown */}
+      <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-purple-600/30">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <FiGitBranch className="text-purple-400" />
+          Activity Overview
+        </h3>
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Contribution Breakdown Chart */}
+          <div className="relative">
+            <div className="aspect-square max-w-xs mx-auto">
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                {/* Background circle */}
+                <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(139, 92, 246, 0.2)" strokeWidth="2" />
+                
+                {/* Commits - 62% */}
+                <motion.path
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 0.62 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  d="M 100 20 A 80 80 0 0 1 100 180"
+                  fill="none"
+                  stroke="url(#commitGradient)"
+                  strokeWidth="40"
+                  strokeLinecap="round"
+                />
+                
+                {/* Pull Requests - 38% */}
+                <motion.path
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 0.38 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+                  d="M 100 180 A 80 80 0 0 1 100 20"
+                  fill="none"
+                  stroke="url(#prGradient)"
+                  strokeWidth="40"
+                  strokeLinecap="round"
+                  strokeDasharray="251.2"
+                  strokeDashoffset="155.744"
+                />
+                
+                {/* Gradient definitions */}
+                <defs>
+                  <linearGradient id="commitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#10b981" />
+                    <stop offset="100%" stopColor="#34d399" />
+                  </linearGradient>
+                  <linearGradient id="prGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#8b5cf6" />
+                    <stop offset="100%" stopColor="#a78bfa" />
+                  </linearGradient>
+                </defs>
+                
+                {/* Center text */}
+                <text x="100" y="95" textAnchor="middle" fill="white" fontSize="18" fontWeight="bold">Activity</text>
+                <text x="100" y="115" textAnchor="middle" fill="#c084fc" fontSize="12">Overview</text>
+              </svg>
+            </div>
+            
+            {/* Legend */}
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded bg-green-500"></div>
+                  <span className="text-purple-200">Commits</span>
+                </div>
+                <span className="text-purple-300 font-semibold">62%</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded bg-purple-500"></div>
+                  <span className="text-purple-200">Pull Requests</span>
+                </div>
+                <span className="text-purple-300 font-semibold">38%</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Repositories List */}
+          <div>
+            <h4 className="text-md font-semibold text-white mb-3">Repositories</h4>
+            <div className="space-y-2">
+              <a
+                href="https://github.com/christian-keitri/3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-3 bg-white/5 rounded-lg border border-purple-600/20 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 group"
+              >
+                <div className="flex items-center gap-2">
+                  <FiCode className="text-purple-400 group-hover:text-purple-300 transition-colors" />
+                  <span className="text-purple-200 group-hover:text-white transition-colors">christian-keitri/3D</span>
+                </div>
+              </a>
+              <a
+                href="https://github.com/christian-keitri/habit_tracker"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-3 bg-white/5 rounded-lg border border-purple-600/20 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 group"
+              >
+                <div className="flex items-center gap-2">
+                  <FiCode className="text-purple-400 group-hover:text-purple-300 transition-colors" />
+                  <span className="text-purple-200 group-hover:text-white transition-colors">christian-keitri/habit_tracker</span>
+                </div>
+              </a>
+              <a
+                href="https://github.com/christian-keitri/Think-Board"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-3 bg-white/5 rounded-lg border border-purple-600/20 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 group"
+              >
+                <div className="flex items-center gap-2">
+                  <FiCode className="text-purple-400 group-hover:text-purple-300 transition-colors" />
+                  <span className="text-purple-200 group-hover:text-white transition-colors">christian-keitri/Think-Board</span>
+                </div>
+              </a>
+              <div className="p-3 bg-white/5 rounded-lg border border-purple-600/20">
+                <p className="text-purple-300/70 text-sm">and 15 other repositories</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
