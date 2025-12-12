@@ -7,6 +7,7 @@ import Header from "./components/Header"
 import HeroSection from "./components/HeroSection"
 import CustomCursor from "./components/CustomCursor"
 import ProgressBar from "./components/ProgressBar"
+import SimpleChatbot from "./components/SimpleChatbot"
 
 const AboutSection = lazy(() => import("./components/AboutSection"))
 const CoreCompetencies = lazy(() => import("./components/CoreCompetencies"))
@@ -46,7 +47,7 @@ export default function App() {
           style={{
             position: 'absolute',
             bottom: '20px',
-            right: '20px',
+            right: '100px', // Moved left to make room for chatbot
             zIndex: 1000,
           }}
         >
@@ -72,6 +73,9 @@ export default function App() {
         
         <ProgressBar />
       </div>
+
+      {/* Chatbot - Outside content div to ensure visibility */}
+      <SimpleChatbot />
 
     </>
   )

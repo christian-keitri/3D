@@ -7,11 +7,11 @@ const CustomCursor = () => {
   const cursorRef = useRef(null);
   const cursorBorderRef = useRef(null);
 
-  // hide cursor on mobile
-  const isMobile = typeof window !== "undefined" &&
-    window.matchMedia("(max-width: 768px)").matches
+  // hide cursor on mobile and tablets for better performance
+  const isMobileOrTablet = typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 1024px)").matches
 
-  if (isMobile) {
+  if (isMobileOrTablet) {
     return null
   }
 
