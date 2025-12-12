@@ -63,6 +63,30 @@ const CoreCompetencies = memo(() => {
     "n8n": <SiN8N className="text-lg" />,
     "Testing": <SiTestinglibrary className="text-lg" />,
     "AWS": <SiAmazonwebservices className="text-lg" />,
+    ".NET 8.0": <SiDotnet className="text-lg" />,
+    "ASP.NET Core": <SiDotnet className="text-lg" />,
+    "Entity Framework Core": <SiDotnet className="text-lg" />,
+    "PostgreSQL": <FaDatabase className="text-lg" />,
+    "Dart": <SiFlutter className="text-lg" />,
+    "RxDart": <SiFlutter className="text-lg" />,
+    "GoRouter": <SiFlutter className="text-lg" />,
+    "AWS Amplify": <SiAmazonwebservices className="text-lg" />,
+    "GetIt": <FaCode className="text-lg" />,
+    "AWS ECS": <SiAmazonwebservices className="text-lg" />,
+    "AWS RDS": <SiAmazonwebservices className="text-lg" />,
+    "AWS Cognito": <SiAmazonwebservices className="text-lg" />,
+    "AWS S3": <SiAmazonwebservices className="text-lg" />,
+    "AWS SQS": <SiAmazonwebservices className="text-lg" />,
+    "CloudWatch": <SiAmazonwebservices className="text-lg" />,
+    "CloudFront": <SiAmazonwebservices className="text-lg" />,
+    "Terraform": <FaDocker className="text-lg" />,
+    "Stream Chat": <FaSync className="text-lg" />,
+    "Sentry": <FaCode className="text-lg" />,
+    "Google Analytics": <FaCode className="text-lg" />,
+    "SendGrid": <FaServer className="text-lg" />,
+    "Slack": <FaServer className="text-lg" />,
+    "Flagsmith": <FaCode className="text-lg" />,
+    "OpenSearch": <FaDatabase className="text-lg" />,
   }
 
   const competencies = [
@@ -76,23 +100,30 @@ const CoreCompetencies = memo(() => {
     {
       category: "Backend Development",
       icon: <FaNodeJs className="text-4xl" />,
-      skills: ["FastAPI", "Node.js", "Python", ".NET", "C#", "Entity Framework", "Prisma", "REST APIs", "Database Design"],
-      description: "Scalable server-side solutions and APIs",
+      skills: [".NET 8.0", "C#", "ASP.NET Core", "Entity Framework Core", "PostgreSQL", "FastAPI", "Node.js", "Python", "REST APIs", "Database Design"],
+      description: "Enterprise-grade server-side solutions with .NET 8.0, PostgreSQL, and scalable APIs",
       color: "from-green-500 to-emerald-500"
     },
     {
       category: "Mobile Development",
       icon: <FaMobile className="text-4xl" />,
-      skills: ["Flutter", "Cross-platform", "Mobile UI/UX"],
-      description: "Native-quality mobile applications",
+      skills: ["Flutter", "Dart", "RxDart", "GoRouter", "AWS Amplify", "GetIt", "Cross-platform", "Mobile UI/UX"],
+      description: "Native-quality mobile applications with state management, authentication, and real-time features",
       color: "from-purple-500 to-pink-500"
     },
     {
-      category: "DevOps & Tools",
-      icon: <FaDocker className="text-4xl" />,
-      skills: ["Docker", "AWS", "CI/CD", "Git", "Figma", "n8n", "Testing"],
-      description: "Streamlined deployment and development workflows",
+      category: "Cloud & Infrastructure",
+      icon: <SiAmazonwebservices className="text-4xl" />,
+      skills: ["AWS ECS", "AWS RDS", "AWS Cognito", "AWS S3", "AWS SQS", "CloudWatch", "CloudFront", "Terraform", "Docker", "PostgreSQL"],
+      description: "Full-stack AWS infrastructure with containerized deployments, managed databases, and IaC",
       color: "from-orange-500 to-red-500"
+    },
+    {
+      category: "Services & Integration",
+      icon: <FaSync className="text-4xl" />,
+      skills: ["Stream Chat", "Sentry", "Google Analytics", "SendGrid", "Slack", "Flagsmith", "OpenSearch", "Testing"],
+      description: "Third-party integrations, analytics, monitoring, and real-time communication services",
+      color: "from-indigo-500 to-purple-500"
     },
   ]
 
@@ -174,7 +205,7 @@ const CoreCompetencies = memo(() => {
         {/* Competencies Grid */}
         <div 
           ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10"
         >
           {competencies.map((comp, index) => (
             <motion.div

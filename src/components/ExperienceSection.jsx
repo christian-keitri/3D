@@ -9,15 +9,24 @@ const experiences = [
     role: "Full-Stack Developer",
     company: "Keitri Software Solutions",
     details:
-      "Building scalable web & mobile apps using React, Flutter, and FastAPI.",
+      "Building enterprise-grade web and mobile applications using .NET 8.0, Flutter, and AWS cloud infrastructure. Developing scalable backend APIs and cross-platform mobile apps with real-time features.",
     achievements: [
-      "Developed and deployed 5+ production applications serving 1000+ users",
-      "Reduced API response time by 40% through optimization and caching strategies",
-      "Led mobile app development using Flutter, achieving 4.8+ app store rating",
-      "Implemented CI/CD pipelines with Docker, reducing deployment time by 60%",
-      "Collaborated with cross-functional teams to deliver features on time"
+      "Architected and developed full-stack applications using .NET 8.0 (ASP.NET Core Web API) with Entity Framework Core and PostgreSQL",
+      "Built cross-platform mobile applications with Flutter/Dart, implementing RxDart for state management, GoRouter for navigation, and AWS Amplify/Cognito for authentication",
+      "Designed and deployed cloud infrastructure on AWS using ECS (Fargate), RDS PostgreSQL, S3, SQS, CloudWatch, and CloudFront with Terraform for IaC",
+      "Integrated third-party services including Stream Chat for real-time messaging, Sentry for error tracking, Google Analytics, and SendGrid for email",
+      "Implemented feature flags with Flagsmith, search functionality with OpenSearch, and comprehensive monitoring with Datadog",
+      "Developed RESTful APIs with proper authentication, authorization, and implemented CI/CD pipelines reducing deployment time by 60%",
+      "Optimized database queries and API performance, reducing response times by 40% through caching strategies and query optimization",
+      "Collaborated with cross-functional teams to deliver production-ready features on time, maintaining 100% on-time delivery record"
     ],
-    technologies: ["React", "Flutter", "FastAPI", "TypeScript", "Prisma", "Docker", "PostgreSQL", "TailwindCSS"],
+    technologies: [
+      ".NET 8.0", "C#", "ASP.NET Core", "Entity Framework Core", "PostgreSQL", 
+      "Flutter", "Dart", "RxDart", "GoRouter", "AWS Amplify", "GetIt",
+      "AWS ECS", "AWS RDS", "AWS Cognito", "AWS S3", "AWS SQS", "CloudWatch", "CloudFront", "Terraform",
+      "Stream Chat", "Sentry", "Google Analytics", "SendGrid", "Flagsmith", "OpenSearch",
+      "Docker", "React", "TypeScript", "TailwindCSS"
+    ],
     location: "Remote"
   },
   {
@@ -25,14 +34,15 @@ const experiences = [
     role: "Electronics Technician",
     company: "Zamony Ventures Corp",
     details:
-      "Maintained automation systems and transitioned into software development.",
+      "Maintained industrial automation systems and transitioned into software development, applying problem-solving skills to software engineering.",
     achievements: [
-      "Maintained and optimized industrial automation systems with 99.9% uptime",
-      "Automated manual processes using Python scripts, saving 15+ hours weekly",
-      "Transitioned to software development, learning modern web technologies",
-      "Collaborated with engineering team on system improvements and upgrades"
+      "Maintained and optimized industrial automation systems with 99.9% uptime, ensuring continuous production operations",
+      "Automated manual processes using Python scripts, saving 15+ hours weekly and reducing human error",
+      "Transitioned to software development, learning modern web technologies including React, Node.js, and cloud services",
+      "Collaborated with engineering team on system improvements, upgrades, and troubleshooting complex technical issues",
+      "Applied systematic debugging approaches and documentation practices to software development workflows"
     ],
-    technologies: ["Python", "Automation", "System Maintenance", "Electronics"],
+    technologies: ["Python", "Automation", "System Maintenance", "Electronics", "Troubleshooting", "Documentation"],
     location: "On-site"
   },
 ]
